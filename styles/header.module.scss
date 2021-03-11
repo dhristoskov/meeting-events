@@ -4,22 +4,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 1.5rem 3rem 1.5rem 0;
     width: 100%;
     height: 2.5rem;
-    border-bottom: 1px solid $border-light;
+    border-bottom: 1px solid white;
 
     .settings {
         display: flex;
-        align-items: center;
         color: $color-white;
 
         .login {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .icon {
-            font-size: 20px;
+            font-size: 22px;
             margin-left: 20px;
         }
 
@@ -31,6 +30,6 @@
 
 @media (max-width: 368px) { 
     .home {
-        padding: 1rem;
+        padding: 1rem 1rem 1rem 0;
     }
 }

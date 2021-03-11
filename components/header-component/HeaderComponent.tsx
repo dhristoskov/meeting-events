@@ -1,11 +1,12 @@
 import SettingsComponent from './SettingsComponent';
+import LogoBtnComponent from './LogoBtnComponent';
 
 import styles from '@/styles/header.module.scss';
 
 const HomeComponent = () => {
     return (
         <div className={styles.home}>
-           <p>Logo</p> 
+           <LogoBtnComponent /> 
            <SettingsComponent />       
         </div>
     )

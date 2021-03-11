@@ -1,0 +1,10 @@
+@import './color-variables.scss';
+
+.container {
+    width: 8rem;
+    text-align: center;
+    
+    .logo {
+        font-size: 22px;
+    }
+}
