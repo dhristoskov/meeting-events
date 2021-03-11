@@ -1,6 +1,7 @@
 import { Fragment, ReactNode, useContext } from 'react';
 
 import HeaderComponent from '@/components/header-component/HeaderComponent';
+import FooterComponent from '../footer-component/FooterComponent';
 import { ThemeContext } from 'context/theme-context/ThemeContext';
 
 import styles from '@/styles/layout.module.scss';
@@ -11,13 +12,14 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }) => {
 
-    const { isLight } = useContext(ThemeContext)
+    const { isLight, DarkTheme, LightTheme } = useContext(ThemeContext)
 
     return (
         <Fragment>
-            <div className={styles.layout} style={{backgroundColor: isLight ? '#D6D6D6' : '#3D3D3D'}}>
+            <div className={styles.layout} style={ (isLight) ? LightTheme : DarkTheme }>
                 <HeaderComponent />
                 { children }
+                <FooterComponent />
             </div>
         </Fragment>    
     )

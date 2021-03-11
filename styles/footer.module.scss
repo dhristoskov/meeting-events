@@ -1,0 +1,36 @@
+@import './color-variables.scss';
+
+.footer {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    width: 30%;
+
+    .options {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 5px 10px;
+
+        .item {
+            width: 33%;
+            text-align: center;
+            font-size: 15;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+    }
+}
+
+.icon {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: $icon-light;
+    cursor: pointer;
+}

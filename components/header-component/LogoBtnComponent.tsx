@@ -1,10 +1,10 @@
-import styles from '@/styles/logo.module.scss'
+import Image from 'next/image';
 
 const LogoBtnComponent = () => {
 
     return (
-        <div className={styles.container}>
-            <p className={styles.logo}>Logo</p>
+        <div>
+            <Image src='/icons/logo.svg' alt='logo' width={35} height={35} />
         </div>
     )
 }

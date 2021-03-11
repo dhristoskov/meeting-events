@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { motion } from 'framer-motion';
 import { IoBulbOutline, IoLogInOutline, IoBulbSharp } from 'react-icons/io5';
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
@@ -10,10 +11,17 @@ const SettingsComponent = () => {
 
     return (
         <div className={styles.settings}>
-            <IoLogInOutline className={styles.login}/>
-            <p className={styles.icon} onClick={onThemeChanger}>
-            { !isLight  ? <IoBulbOutline /> : <IoBulbSharp /> }
-            </p>
+           <p className={styles.login}><IoLogInOutline /></p> 
+            <motion.p 
+            className={styles.icon} 
+            onClick={onThemeChanger}
+            whileHover={{ scale: 1.1, originY: 0, transition: { duration: .3 } }}
+            whileTap={{ scale: 0.9 }}
+            >
+            { !isLight 
+             ? <IoBulbOutline className={styles.light}/>
+             : <IoBulbSharp className={styles.dark}/> }
+            </motion.p>
         </div>   
     )
 }

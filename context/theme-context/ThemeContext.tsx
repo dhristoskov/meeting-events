@@ -1,11 +1,15 @@
 import { createContext, ReactNode, useState } from 'react';
 
+import { DarkTheme, LightTheme } from './Themes';
+
 
 interface Props {
     children: ReactNode
 }
 
 interface Themes {
+    DarkTheme: {backgroundColor: string, color: string},
+    LightTheme: {backgroundColor: string, color: string},
     isLight: boolean,
     onThemeChanger: () => void
 }
@@ -21,7 +25,7 @@ const ThemeContextProvider: React.FC<Props> = ({ children }) => {
     }
 
     return (
-        <ThemeContext.Provider value={{ isLight, onThemeChanger }}>
+        <ThemeContext.Provider value={{ isLight, onThemeChanger, DarkTheme, LightTheme }}>
             { children }
         </ThemeContext.Provider>
     )
