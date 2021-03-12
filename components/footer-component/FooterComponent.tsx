@@ -1,12 +1,16 @@
 import { Fragment, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { IoIosMore } from 'react-icons/io';
+import { motion, AnimatePresence, useCycle } from 'framer-motion';
+import { IoIosArrowUp } from 'react-icons/io';
 
 import styles from '@/styles/footer.module.scss'
 
 const FooterComponent = () => {
 
     const [ isOpen, setIsOpen ] = useState<boolean>(false);
+    const [animate, cycle] = useCycle<{rotate: number}>(
+        { rotate: 0 },
+        { rotate: 180 }
+    );
 
     const openFooterHandler = (): void => {
         setIsOpen(prevState => ! prevState)
@@ -15,9 +19,13 @@ const FooterComponent = () => {
 
     return (
         <Fragment>
-            <p className={styles.icon}
-                onClick={openFooterHandler}><IoIosMore />
-            </p> 
+            <motion.p className={styles.icon}
+                onClick={openFooterHandler}
+                animate={animate}
+                onTap={() => cycle()}
+                transition={{ duration: .5}}
+                ><IoIosArrowUp />
+            </motion.p> 
             <div className={styles.footer}>  
                 <AnimatePresence>
                 {

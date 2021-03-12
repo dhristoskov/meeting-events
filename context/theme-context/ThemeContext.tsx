@@ -4,14 +4,14 @@ import { DarkTheme, LightTheme } from './Themes';
 
 
 interface Props {
-    children: ReactNode
+    children: ReactNode;
 }
 
 interface Themes {
-    DarkTheme: {backgroundColor: string, color: string},
-    LightTheme: {backgroundColor: string, color: string},
-    isLight: boolean,
-    onThemeChanger: () => void
+    DarkTheme: {backgroundColor: string, color: string};
+    LightTheme: {backgroundColor: string, color: string};
+    isLight: boolean;
+    onThemeChanger: () => void;
 }
 
 export const ThemeContext = createContext<Themes>({} as Themes);

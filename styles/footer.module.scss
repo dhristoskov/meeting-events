@@ -3,16 +3,18 @@
 .footer {
     position: fixed;
     left: 50%;
-    bottom: 40px;
+    bottom: 20px;
     transform: translate(-50%, -50%);
-    margin: 0 auto;
-    width: 30%;
+    width: 40%;
 
     .options {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         padding: 5px 10px;
+        margin: auto;
 
         .item {
             width: 33%;
@@ -28,9 +30,32 @@
 .icon {
     position: fixed;
     left: 50%;
-    bottom: 0;
+    bottom: 5px;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 22px;
     color: $icon-light;
     cursor: pointer;
+}
+
+
+@media (max-width: 880px) { 
+    .footer {
+        width: 70%;
+        bottom: 10px;
+        .options {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .item {
+                width: 100%;
+                margin-bottom: 5px;
+
+                &:last-child {
+                    margin-bottom: none;
+                }
+            }
+        }
+    }
 }

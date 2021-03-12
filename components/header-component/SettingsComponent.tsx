@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { IoBulbOutline, IoLogInOutline, IoBulbSharp } from 'react-icons/io5';
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
@@ -11,7 +12,7 @@ const SettingsComponent = () => {
 
     return (
         <div className={styles.settings}>
-           <p className={styles.login}><IoLogInOutline /></p> 
+           <Link href='/auth/register'><a className={styles.login}><IoLogInOutline /></a></Link> 
             <motion.p 
             className={styles.icon} 
             onClick={onThemeChanger}
@@ -19,8 +20,8 @@ const SettingsComponent = () => {
             whileTap={{ scale: 0.9 }}
             >
             { !isLight 
-             ? <IoBulbOutline className={styles.light}/>
-             : <IoBulbSharp className={styles.dark}/> }
+             ? <IoBulbSharp className={styles.light}/>
+             : <IoBulbOutline className={styles.dark}/>}
             </motion.p>
         </div>   
     )
