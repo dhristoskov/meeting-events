@@ -1,22 +1,20 @@
-import React, { useState, ChangeEvent, FormEvent, Fragment } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 
-import { ValidateInput } from 'utils/formValidator';
+import { ValidateInput } from '@/components/utils/formValidator';
+import { RegistrationUser } from 'interfaces/registrationUser';
 
 import styles from '@/styles/auth.module.scss';
 
-interface User {
-    username: string
-    email: string;
-    password: string;
-    password2: string;
+interface Props {
+    onRegisterHandler: (user: RegistrationUser) => void;
 }
 
-const RegisterComponent = () => {
+const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
 
     const [ addEmail, onEmailAdd ] = useState(false);
     const [ errors, setErrors ] = useState<any>([]);
-    const [ registerUser, setRegisterUser ] = useState<User>({
+    const [ registerUser, setRegisterUser ] = useState<RegistrationUser>({
         username: '',
         email: '',
         password: '',
@@ -35,7 +33,7 @@ const RegisterComponent = () => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault(); 
-        console.log(registerUser);
+        onRegisterHandler(registerUser);
         setRegisterUser({
             username: '',
             email: '',
