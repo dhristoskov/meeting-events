@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 
 import { ValidateInput } from '@/components/utils/formValidator';
+import PasswordField from '@/components/auth-component/PasswordField';
 import { RegistrationUser } from 'interfaces/registrationUser';
 
 import styles from '@/styles/auth.module.scss';
@@ -52,15 +53,11 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
                     value={username} onChange={onHandleChange} />
                     {errors.username && <p className={styles.errors}>{errors.username}</p>}
                 </div>
-                <div className={styles.field}>
-                    <input type="password" name='password' placeholder='Enter password'
-                    value={password} onChange={onHandleChange}/>
-                     {errors.password && <p className={styles.errors}>{errors.password}</p>}
-                </div>
+                <PasswordField onHandleChange={onHandleChange} value={password} errors={errors.password}/>
                 <div className={styles.field}>
                     <input type="password" name='password2' placeholder='Confirm password'
                     value={password2} onChange={onHandleChange}/>
-                     {errors.password2 && <p className={styles.errors}>{errors.password2}</p>}
+                    {errors.password2 && <p className={styles.errors}>{errors.password2}</p>}
                 </div>
                 <div className={styles.field}>
                     {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import axios from 'axios';
 
-import RegisterComponent from '@/components/register-component/RegisterComponent';
+import RegisterComponent from '@/components/auth-component/RegisterComponent';
 import { RegistrationUser } from 'interfaces/registrationUser';
 
 import styles from '@/styles/auth.module.scss';

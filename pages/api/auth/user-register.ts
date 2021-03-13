@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         user = new User({
           username,
           email,
-          password: hashedPassword,
+          password: hashedPassword
         });
 
         await user.save();

@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     align-items: center;
     margin: 50px auto;
-    width: 60%;
+    width: 65%;
 }
 .container {
     width: 40%;
@@ -69,6 +69,15 @@
                 text-align: start;
                 padding: 5px;
                 font-size: 12px;
+            }
+
+            .passwordIcon {
+                position: absolute;
+                bottom: 25px;
+                right: 5px;
+                font-size: 18px;
+                color: $icon-light;
+                cursor: pointer;
             }
         }
     }
