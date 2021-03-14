@@ -3,4 +3,5 @@ export interface Errors {
     email: string;
     password: string;
     password2: string;
+    confirm?: string;
 };

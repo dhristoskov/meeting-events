@@ -1,8 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { motion } from 'framer-motion';
 
 import { ValidateInput } from '@/components/utils/formValidator';
 import PasswordField from '@/components/auth-component/PasswordField';
+import SubmitButton from '@/components/auth-component/SubmitButton';
+import EmailField from '@/components/auth-component/EmailField';
 import { RegistrationUser } from 'interfaces/registrationUser';
 
 import styles from '@/styles/auth.module.scss';
@@ -13,7 +14,6 @@ interface Props {
 
 const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
 
-    const [ addEmail, onEmailAdd ] = useState(false);
     const [ errors, setErrors ] = useState<any>([]);
     const [ registerUser, setRegisterUser ] = useState<RegistrationUser>({
         username: '',
@@ -25,7 +25,6 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
     const { username, email, password, password2 } = registerUser;
 
     const onHandleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        e.preventDefault();
         const { name, value } = e.target;
         let error = ValidateInput(name, value);
         setErrors(error)
@@ -34,13 +33,17 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault(); 
-        onRegisterHandler(registerUser);
-        setRegisterUser({
-            username: '',
-            email: '',
-            password: '',
-            password2: ''
-        });
+        if(password !== password2){
+            setErrors({ confirm:'Password and confirm password does not match' })
+        }else {
+            onRegisterHandler(registerUser);
+            setRegisterUser({
+                username: '',
+                email: '',
+                password: '',
+                password2: ''
+            });
+        }
     };
 
     return (
@@ -59,28 +62,8 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
                     value={password2} onChange={onHandleChange}/>
                     {errors.password2 && <p className={styles.errors}>{errors.password2}</p>}
                 </div>
-                <div className={styles.field}>
-                    {
-                        !addEmail && <p onClick={() => onEmailAdd(true)}
-                        className={styles.email}>
-                            Click to add E-mail for more security
-                        </p>
-                    }
-                    {
-                        addEmail && 
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: .7 }}>
-                            <input type="text" name='email' placeholder='E-mail'
-                            value={email} onChange={onHandleChange} />   
-                            {errors.email && <p className={styles.errors}>{errors.email}</p>}  
-                        </motion.div>
-                    }
-                </div>
-                <div className={styles.field}>
-                    <input type="submit" value='Register'/>   
-                </div>
+                <EmailField onHandleChange={onHandleChange} value={email} errors={errors.email}/>
+                <SubmitButton name={'Registration'} errors={errors}/>
             </form>
         </div>
     )

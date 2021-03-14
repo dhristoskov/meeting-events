@@ -1,12 +1,13 @@
 import { useState, ChangeEvent } from 'react';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
+import { Errors } from 'interfaces/errors';
 
 import styles from '@/styles/auth.module.scss';
 
 interface Props {
     value: string;
     onHandleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    errors: any
+    errors?: Errors;
 }
 
 const PasswordField: React.FC<Props> = ({ value, onHandleChange, errors}) => {

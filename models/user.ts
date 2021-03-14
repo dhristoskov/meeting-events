@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
         type: String, 
         required: true,
         minlength: 7
+    },
+    created: {
+        type: Date,
+        required: true,
+        default: Date.now()
     }
 });
 
