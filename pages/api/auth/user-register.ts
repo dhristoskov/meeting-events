@@ -1,16 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import connectDB from '../../../middleware/mongoose';
 import User from '../../../models/user';
 import { UserInterface } from 'interfaces/user';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
 
     const { username, email, password } = req.body
 
-    let user: UserInterface;
+    let user: UserInterface | null = null;
     try {
         user = await User.findOne({ email });
     }catch(err){
@@ -36,11 +37,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
         await user.save();
-        res.status(201).send({ msg: 'User Created!' });
     }catch(err){
         res.status(500).send({ msg: 'Server Error' });
     }
+
+    let token: string;
+    try{
+        token = jwt.sign(
+            { userId: user.id, username: user.username },
+            process.env.JWT_SECRET, 
+            { expiresIn: '1h' });
+    }catch(err){
+        res.status(500).send({ msg: 'Server Error' });
+    };
+
+    res.json({userId: user.id, username: user.username, token: token});
   }
 };
 
-export default connectDB(handler);
+export default connectDB(registrationHandler);

@@ -10,9 +10,10 @@ import styles from '@/styles/auth.module.scss';
 
 interface Props {
     onRegisterHandler: (user: RegistrationUser) => void;
+    switchLogin: () => void;
 }
 
-const RegisterComponent: React.FC<Props> = ({ onRegisterHandler }) => {
+const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) => {
 
     const [ errors, setErrors ] = useState<any>([]);
     const [ registerUser, setRegisterUser ] = useState<RegistrationUser>({

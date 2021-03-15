@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { motion } from 'framer-motion';
 
 import PasswordField from '@/components/auth-component/PasswordField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
@@ -6,7 +7,12 @@ import { LoginUser } from 'interfaces/loginUser';
 
 import styles from '@/styles/auth.module.scss';
 
-const LoginComponent = () => {
+interface Props {
+    switchLogin: () => void;
+    onLoginHandler: (loginuser: LoginUser) => void;
+};
+
+const LoginComponent: React.FC<Props> = ({ switchLogin, onLoginHandler }) => {
 
     const [ loginUser, setLoginUser ] = useState<LoginUser>({
         nameOrEmail: '',
@@ -22,7 +28,7 @@ const LoginComponent = () => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault(); 
-        console.log(loginUser);
+        onLoginHandler(loginUser);
         setLoginUser({
             nameOrEmail: '',
             password: '',
@@ -41,6 +47,12 @@ const LoginComponent = () => {
                 <PasswordField onHandleChange={onHandleChange} value={password} />
                 <SubmitButton name={'Log-in'} />
             </form>
+            <p 
+            className={styles.redirect} 
+            onClick={switchLogin}
+            >
+                Don't have an account yet
+            </p>
         </div>
     )
 

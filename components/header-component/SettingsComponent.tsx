@@ -12,7 +12,7 @@ const SettingsComponent = () => {
 
     return (
         <div className={styles.settings}>
-           <Link href='/auth/register'><a className={styles.login}><IoLogInOutline /></a></Link> 
+           <Link href='/auth'><a className={styles.login}><IoLogInOutline /></a></Link> 
             <motion.p 
             className={styles.icon} 
             onClick={onThemeChanger}
