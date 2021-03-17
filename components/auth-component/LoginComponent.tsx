@@ -15,11 +15,11 @@ interface Props {
 const LoginComponent: React.FC<Props> = ({ switchLogin, onLoginHandler }) => {
 
     const [ loginUser, setLoginUser ] = useState<LoginUser>({
-        nameOrEmail: '',
+        username: '',
         password: '',
      });
 
-    const { nameOrEmail, password} = loginUser;
+    const { username, password} = loginUser;
 
     const onHandleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
@@ -30,7 +30,7 @@ const LoginComponent: React.FC<Props> = ({ switchLogin, onLoginHandler }) => {
         e.preventDefault(); 
         onLoginHandler(loginUser);
         setLoginUser({
-            nameOrEmail: '',
+            username: '',
             password: '',
         });
     };
@@ -41,8 +41,8 @@ const LoginComponent: React.FC<Props> = ({ switchLogin, onLoginHandler }) => {
             <p className={styles.subtext}>enter your credentials to log-in</p>
             <form className={styles.form} onSubmit={onHandleSubmit}>
                 <div className={styles.field}>
-                    <input type='text' name='nameOrEmail' placeholder='Enter Email or Username'  
-                    value={nameOrEmail} onChange={onHandleChange} />
+                    <input type='text' name='username' placeholder='Username'  
+                    value={username} onChange={onHandleChange} />
                 </div>
                 <PasswordField onHandleChange={onHandleChange} value={password} />
                 <SubmitButton name={'Log-in'} />

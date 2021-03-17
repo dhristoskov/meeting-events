@@ -3,7 +3,6 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { ValidateInput } from '@/components/utils/formValidator';
 import PasswordField from '@/components/auth-component/PasswordField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
-import EmailField from '@/components/auth-component/EmailField';
 import { RegistrationUser } from 'interfaces/registrationUser';
 
 import styles from '@/styles/auth.module.scss';
@@ -18,12 +17,11 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) 
     const [ errors, setErrors ] = useState<any>([]);
     const [ registerUser, setRegisterUser ] = useState<RegistrationUser>({
         username: '',
-        email: '',
         password: '',
         password2: ''
      });
 
-    const { username, email, password, password2 } = registerUser;
+    const { username, password, password2 } = registerUser;
 
     const onHandleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
@@ -40,7 +38,6 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) 
             onRegisterHandler(registerUser);
             setRegisterUser({
                 username: '',
-                email: '',
                 password: '',
                 password2: ''
             });
@@ -63,7 +60,6 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) 
                     value={password2} onChange={onHandleChange}/>
                     {errors.password2 && <p className={styles.errors}>{errors.password2}</p>}
                 </div>
-                <EmailField onHandleChange={onHandleChange} value={email} errors={errors.email}/>
                 <SubmitButton name={'Registration'} errors={errors}/>
             </form>
         </div>

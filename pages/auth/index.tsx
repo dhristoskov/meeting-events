@@ -31,7 +31,7 @@ const Register = () => {
                 login(res.data.userId, res.data.token, res.data.username);
                 router.push('/')
              }).catch(err => {
-                console.log(err);
+                console.log(err.response.data);
              });
     };
 
@@ -42,7 +42,7 @@ const Register = () => {
                 login(res.data.userId, res.data.token, res.data.username);
                 router.push('/')
              }).catch(err => {
-                console.log(err);
+                console.log(err.response.data);
              });
     };
 

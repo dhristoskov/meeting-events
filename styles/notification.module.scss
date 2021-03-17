@@ -1,0 +1,31 @@
+@import './color-variable.scss'; 
+
+.notification {
+    position: absolute;
+    z-index: 10;
+    top: 5rem;
+    width: 100%;
+    min-height: 30px;
+   
+    .alert, .success {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 15px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .alert {
+        background-color: red;
+    }
+
+    .success {
+        background-color: green;
+    }
+
+    .message {
+        font-size: 15px;
+        color: $color-white;
+    }
+}

@@ -3,6 +3,7 @@ import { Fragment, ReactNode, useContext } from 'react';
 import HeaderComponent from '@/components/header-component/HeaderComponent';
 import FooterComponent from '../footer-component/FooterComponent';
 import AuthContextProvider from 'context/auth-context/AuthContext';
+import Notification from '@/components/notification-component/Notification';
 import { ThemeContext } from 'context/theme-context/ThemeContext';
 
 import styles from '@/styles/layout.module.scss';
@@ -17,8 +18,9 @@ const Layout: React.FC<Props> = ({ children }) => {
 
     return (
         <Fragment>
+            <Notification />
             <AuthContextProvider>
-                <div className={styles.layout} style={ (isLight) ? LightTheme : DarkTheme }>
+                <div className={styles.layout} style={ ( isLight ) ? LightTheme : DarkTheme }>
                     <HeaderComponent />
                     { children }
                     <FooterComponent />

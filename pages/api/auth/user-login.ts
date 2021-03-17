@@ -8,11 +8,11 @@ import User from 'models/user';
 
 const loginHandler = async  (req: NextApiRequest, res: NextApiResponse) => {
 
-    const { nameOrEmail, password } = req.body;
+    const { username, password } = req.body;
 
     let user: UserInterface | null = null;
     try {
-        user = await User.findOne({ email: nameOrEmail });
+        user = await User.findOne({ username }).exec();
     }catch(err){
         res.status(500).send({ msg: 'Server Error' });
     }

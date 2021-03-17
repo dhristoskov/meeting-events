@@ -16,7 +16,19 @@
         display: flex;
         align-items: center;
 
-        .login {
+        .loggedIn {
+            display: flex;
+            align-items: center;
+
+            .profile {
+                font-size: 23px;
+                text-decoration: none;
+                color:  $icon-light;
+                margin-left: 20px;
+            }
+        }
+
+        .auth {
             font-size: 26px;
             text-decoration: none;
             color: $icon-active;
@@ -35,7 +47,7 @@
             }
         }
 
-        .login, .icon {
+        .auth, .icon {
             cursor: pointer;
         }
     }

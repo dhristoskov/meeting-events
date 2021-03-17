@@ -1,18 +1,34 @@
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { IoBulbOutline, IoLogInOutline, IoBulbSharp } from 'react-icons/io5';
+import { 
+    IoBulbOutline, 
+    IoLogInOutline, 
+    IoBulbSharp, 
+    IoLogOutOutline, 
+    IoPersonOutline 
+} from 'react-icons/io5';
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
+import { AuthContext } from 'context/auth-context/AuthContext';
 
 import styles from '@/styles/header.module.scss';
 
 const SettingsComponent = () => {
+    const { isLoggedIn, logout } = useContext(AuthContext);
     const { isLight, onThemeChanger } = useContext(ThemeContext);
 
     return (
         <div className={styles.settings}>
-           <Link href='/auth'><a className={styles.login}><IoLogInOutline /></a></Link> 
+            {
+                isLoggedIn 
+                ? 
+                <div className={styles.loggedIn}>
+                    <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
+                    <Link href='/user-profile'><a className={styles.profile}><IoPersonOutline /></a></Link> 
+                </div> 
+                : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 
+            }       
             <motion.p 
             className={styles.icon} 
             onClick={onThemeChanger}

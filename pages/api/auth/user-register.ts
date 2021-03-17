@@ -9,11 +9,12 @@ import { UserInterface } from 'interfaces/user';
 const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
 
-    const { username, email, password } = req.body
+    const { username, password } = req.body
 
     let user: UserInterface | null = null;
+
     try {
-        user = await User.findOne({ email });
+        user = await User.findOne({ username });
     }catch(err){
         res.status(500).send({ msg: 'Server Error' })
     }
@@ -32,7 +33,6 @@ const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) =>
     try{
         user = new User({
           username,
-          email,
           password: hashedPassword
         });
 
