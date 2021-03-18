@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, Fragment } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import RegisterComponent from '@/components/auth-component/RegisterComponent';
@@ -29,9 +29,9 @@ const Register = () => {
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 login(res.data.userId, res.data.token, res.data.username);
-                router.push('/')
+                router.push('/');
              }).catch(err => {
-                console.log(err.response.data);
+                console.log(err.response.data.msg);
              });
     };
 
@@ -40,9 +40,9 @@ const Register = () => {
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 login(res.data.userId, res.data.token, res.data.username);
-                router.push('/')
+                router.push('/');
              }).catch(err => {
-                console.log(err.response.data);
+                console.log(err.response.data.msg);
              });
     };
 
@@ -51,14 +51,18 @@ const Register = () => {
     };
 
     return(
-        <div className={styles.register}>
+        <Fragment>
+            <div className={styles.register}>
             <Image src='/icons/register.svg' alt={'register'} width={320} height={320}/>
-            {
-                isLogin 
-                ? <LoginComponent switchLogin={switchLogin} onLoginHandler={onLoginHandler}/>
-                : <RegisterComponent onRegisterHandler={onRegisterHandler} switchLogin={switchLogin}/>
-            }
-        </div>
+                {
+                    isLogin 
+                    ? <LoginComponent switchLogin={switchLogin} onLoginHandler={onLoginHandler}/>
+                    : <RegisterComponent onRegisterHandler={onRegisterHandler} switchLogin={switchLogin}/>
+                }
+             </div>
+        </Fragment>
+
+
         
     )
 

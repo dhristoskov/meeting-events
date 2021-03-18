@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { 
     IoBulbOutline, 
@@ -15,8 +16,15 @@ import { AuthContext } from 'context/auth-context/AuthContext';
 import styles from '@/styles/header.module.scss';
 
 const SettingsComponent = () => {
-    const { isLoggedIn, logout } = useContext(AuthContext);
+
+    const router = useRouter();
+    const { isLoggedIn, logout, userId } = useContext(AuthContext);
     const { isLight, onThemeChanger } = useContext(ThemeContext);
+
+    const onLogOutHandler = () => {
+        logout();
+        router.replace('/');
+    }
 
     return (
         <div className={styles.settings}>
@@ -24,8 +32,8 @@ const SettingsComponent = () => {
                 isLoggedIn 
                 ? 
                 <div className={styles.loggedIn}>
-                    <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
-                    <Link href='/user-profile'><a className={styles.profile}><IoPersonOutline /></a></Link> 
+                    <p className={styles.auth} onClick={onLogOutHandler}><IoLogOutOutline /></p>
+                    <Link href={{pathname: '/user-dashboard/[id]', query: { id: userId }}}><a className={styles.profile}><IoPersonOutline /></a></Link> 
                 </div> 
                 : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 
             }       

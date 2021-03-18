@@ -47,5 +47,3 @@ const Notification = () => {
 }
 
 export default Notification;
-
-//className={type === 'alert' ? styles.alert : styles.notification}

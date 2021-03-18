@@ -62,6 +62,12 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) 
                 </div>
                 <SubmitButton name={'Registration'} errors={errors}/>
             </form>
+            <p 
+            className={styles.redirect} 
+            onClick={switchLogin}
+            >
+               Already have an account? 
+            </p>
         </div>
     )
 
