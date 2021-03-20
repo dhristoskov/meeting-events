@@ -53,6 +53,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
         setUsername(null);
         setExpTimer(null);
         localStorage.removeItem('userData');
+        //add router.replace
       }, []);
 
       useEffect(() => {

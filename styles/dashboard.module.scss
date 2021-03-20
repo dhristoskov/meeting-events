@@ -4,23 +4,16 @@
     position: fixed;
     top: 3.8rem;
     left: 0;
-    width: 100%;
-    min-height: 30px;
+    width: 15%;
+    height: 100%;
     background-color: $icon-light;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   
 
-    .settings {
-        width: 70%;
-        height: 100%;
+    .profile, .settings {
+        margin-top: 30px;
+        padding: 0 10px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .item {
-            cursor: pointer;
-            font-weight: 600;
-        }
+        flex-direction: column;
+        justify-content: flex-start;
     }
 }

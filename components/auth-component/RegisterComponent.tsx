@@ -26,7 +26,7 @@ const RegisterComponent: React.FC<Props> = ({ onRegisterHandler, switchLogin }) 
     const onHandleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
         let error = ValidateInput(name, value);
-        setErrors(error)
+        setErrors(error);
         setRegisterUser({...registerUser, [name]: value})
     };
 
