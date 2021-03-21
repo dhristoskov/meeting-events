@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import ChangePassword from '@/components/auth-component/ChangePassword';
 import ChangeEmail from '@/components/auth-component/ChangeEmail';
 import { AuthContext } from 'context/auth-context/AuthContext';
+import { UserInterface } from 'interfaces/user';
 
 const UserSettings = () => {
 
@@ -14,7 +15,7 @@ const UserSettings = () => {
 
     const changePasswordHandler = (userData: {password2: string, password: string }) => {
         const newData = {...userData,  id : userId }
-        axios.put('/api/auth/change-password', newData, 
+        axios.put<{msg: string}>('/api/auth/change-password', newData, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 router.push({
@@ -28,7 +29,7 @@ const UserSettings = () => {
 
     const changeEmailHandler = (emailData: { email: string }) => {
         const newData = {...emailData,  id : userId }
-        axios.put('/api/auth/update-user', newData, 
+        axios.put<UserInterface>('/api/auth/update-user', newData, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 router.push({

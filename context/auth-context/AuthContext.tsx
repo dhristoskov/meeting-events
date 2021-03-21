@@ -1,4 +1,5 @@
 import { createContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/router'
 
 interface Props {
     children: ReactNode;
@@ -25,6 +26,7 @@ let logoutTimer;
 
 const AuthContextProvider: React.FC<Props> = ({ children }) => {
 
+    const router = useRouter();
     const [token, setToken] = useState<string>(null);
     const [userId, setUserId] = useState<string>(null);
     const [username, setUsername] = useState<string>(null)
@@ -53,7 +55,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
         setUsername(null);
         setExpTimer(null);
         localStorage.removeItem('userData');
-        //add router.replace
+        router.replace('/');
       }, []);
 
       useEffect(() => {
@@ -69,6 +71,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
           logoutTimer = setTimeout(logout, remainingTime);
         }else {
           clearTimeout(logoutTimer);
+          router.replace('/');
         }
       }, [token, logout, expirTime]);
 

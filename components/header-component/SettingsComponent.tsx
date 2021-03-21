@@ -21,18 +21,13 @@ const SettingsComponent = () => {
     const { isLoggedIn, logout, userId } = useContext(AuthContext);
     const { isLight, onThemeChanger } = useContext(ThemeContext);
 
-    const onLogOutHandler = () => {
-        logout();
-        router.replace('/');
-    }
-
     return (
         <div className={styles.settings}>
             {
                 isLoggedIn 
                 ? 
                 <div className={styles.loggedIn}>
-                    <p className={styles.auth} onClick={onLogOutHandler}><IoLogOutOutline /></p>
+                    <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
                     <Link href={`/user-dashboard/${ userId }`}><a className={styles.profile}><IoPersonOutline /></a></Link> 
                 </div> 
                 : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 

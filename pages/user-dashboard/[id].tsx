@@ -46,7 +46,6 @@ export const getServerSideProps: GetServerSideProps  = async ({ params }) => {
           },
         }
     }
-
     return {
        props: { user: response.data.user },
     };
