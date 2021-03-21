@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import isLength from 'validator/lib/isLength';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -10,6 +11,13 @@ const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) =>
   if (req.method === 'POST') {
 
     const { username, password } = req.body
+
+    if (!isLength(username, { min: 3, max: 20 })) {
+        return res.status(422).send('Username must be 3-20 characters long');
+    } else if (!isLength(password, { min: 7 })) {
+        return res.status(422).send('Password must be at least 7 characters');
+    }
+
 
     let user: UserInterface | null = null;
 

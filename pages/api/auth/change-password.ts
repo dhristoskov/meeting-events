@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import isLength from 'validator/lib/isLength';
 import bcrypt from 'bcrypt';
 
 import connectDB from 'middleware/mongoose';
@@ -10,6 +11,10 @@ const changePassword = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'PUT') {
         
         const { password2, password, id } = req.body;
+
+        if (!isLength(password, { min: 7 })) {
+            return res.status(422).send('Password must be at least 7 characters');
+        }
 
         let user: UserInterface | null = null;
         try{

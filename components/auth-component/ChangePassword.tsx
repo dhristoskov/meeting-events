@@ -1,24 +1,21 @@
-import { useState, ChangeEvent, FormEvent, useContext } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 
 import { ValidateInput } from '@/components/utils/formValidator';
 import PasswordField from '@/components/auth-component/PasswordField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
-import { AuthContext } from 'context/auth-context/AuthContext';
 
 import styles from '@/styles/auth.module.scss';
 
 interface Props {
-    changePasswordHandler: (userData: {password2: string, password: string, id: string}) => void;
+    changePasswordHandler: (userData: {password2: string, password: string }) => void;
 }
 
 const ChangePassowrd: React.FC<Props> = ({ changePasswordHandler }) => {
 
-    const { userId } = useContext(AuthContext);
     const [ errors, setErrors ] = useState<any>([]);
-    const [ userData, setUserData ] = useState<{password2: string, password: string, id: string}>({
+    const [ userData, setUserData ] = useState<{password2: string, password: string }>({
         password2: '',
-        password: '',
-        id: userId
+        password: ''
      });
 
     const { password2, password} = userData;
@@ -35,8 +32,7 @@ const ChangePassowrd: React.FC<Props> = ({ changePasswordHandler }) => {
         changePasswordHandler(userData);
         setUserData({
             password2: '',
-            password: '',
-            id: userId
+            password: ''
         });
     };
 

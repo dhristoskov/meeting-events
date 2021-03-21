@@ -15,10 +15,21 @@ const userSchema = new mongoose.Schema({
         default: 'no-data',
         minlength: 6
     },
+    avatar: {
+        type: String, 
+        required: false,
+        default: 'no-data'
+    },
     password: { 
         type: String, 
         required: true,
         minlength: 7
+    },
+    role: {
+        type: String,
+        required: true,
+        default: 'user',
+        enum: [ 'user',  'creator', 'admin' ] 
     },
     created: {
         type: Date,

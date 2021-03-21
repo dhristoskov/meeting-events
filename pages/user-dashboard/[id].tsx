@@ -22,7 +22,7 @@ const UserProfilePage: React.FC<Props> = ({ user }) => {
                 <p>{date}</p>
             </div>
             <div className={styles.settings}>
-                <Link href='/user-dashboard/settings/change-password'>
+                <Link href='/user-dashboard/settings'>
                     <a className={styles.item}>Settings</a></Link>
             </div>      
         </div>
@@ -31,12 +31,12 @@ const UserProfilePage: React.FC<Props> = ({ user }) => {
 
 export default UserProfilePage;
 
-export const getServerSideProps: GetServerSideProps  = async ({ query: { id } }) => {
+export const getServerSideProps: GetServerSideProps  = async ({ params }) => {
 
-    const url = 'http://localhost:3000/api/user-profile/profile';
-    const payload = { params: { id } };
+    const { id } = params;
+    const url = `http://localhost:3000/api/user-profile/${id}`;
 
-    const response = await axios.get(url, payload);
+    const response = await axios.get(url);
     
     if (!response) {
         return {
@@ -49,6 +49,5 @@ export const getServerSideProps: GetServerSideProps  = async ({ query: { id } })
 
     return {
        props: { user: response.data.user },
-       //revalidate: 1
     };
 }

@@ -7,12 +7,12 @@ import { UserInterface } from 'interfaces/user';
 const userByIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if(req.method === 'GET'){
-        
-        const { id } = req.body
+
+        const { id } = req.query;
 
         let user: UserInterface | null = null;
         try {
-            user = await User.findOne( { id }, { password: 0} );
+            user = await User.findOne( { _id: id }, { password: 0} );
         }catch(err){
             res.status(500).send({ msg: 'Server Error' })
         }
