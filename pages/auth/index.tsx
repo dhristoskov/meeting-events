@@ -7,6 +7,7 @@ import RegisterComponent from '@/components/auth-component/RegisterComponent';
 import LoginComponent from '@/components/auth-component/LoginComponent';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import { RegistrationUser } from 'interfaces/registrationUser';
+import { Notification } from 'context/notification-context/Notification';
 import { LoginUser } from 'interfaces/loginUser';
 
 import styles from '@/styles/auth.module.scss';
@@ -20,6 +21,7 @@ interface UserResponse {
 
 const Register = () => {
 
+    const { showNotification } = useContext(Notification);
     const router = useRouter();
     const { login } = useContext(AuthContext);
     const [ isLogin, setIsLogin ] = useState<boolean>(true);
@@ -39,10 +41,11 @@ const Register = () => {
         axios.post<UserResponse>('/api/auth/user-login', loginUser, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
+                showNotification({message: 'Login successfully', type: 'success'});
                 login(res.data.userId, res.data.token, res.data.username);
                 router.push('/');
              }).catch(err => {
-                console.log(err.response.data.msg);
+                showNotification({message: err.response.data.msg, type: 'alert'});
              });
     };
 

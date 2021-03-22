@@ -6,10 +6,12 @@ import ChangePassword from '@/components/auth-component/ChangePassword';
 import ChangeEmail from '@/components/auth-component/ChangeEmail';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import { UserInterface } from 'interfaces/user';
+import { Notification } from 'context/notification-context/Notification';
 
 const UserSettings = () => {
 
     const router = useRouter();
+    const { showNotification } = useContext(Notification);
     const { userId } = useContext(AuthContext);
 
 
@@ -23,7 +25,7 @@ const UserSettings = () => {
                     query: { id: userId }
                 });
              }).catch(err => {
-                console.log(err.response.data.msg);
+                showNotification({message: err.response.data.msg, type: 'alert'});
              });
     }
 
@@ -32,12 +34,13 @@ const UserSettings = () => {
         axios.put<UserInterface>('/api/auth/update-user', newData, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
+                showNotification({message: 'Email changed', type: 'succses'})
                 router.push({
                     pathname: '/user-dashboard/[id]', 
                     query: { id: userId }
                 });
              }).catch(err => {
-                console.log(err.response.data.msg);
+                showNotification({message: err.response.data.msg, type: 'alert'});
              });
     }
 
