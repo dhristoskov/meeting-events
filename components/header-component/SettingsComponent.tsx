@@ -7,7 +7,8 @@ import {
     IoLogInOutline, 
     IoBulbSharp, 
     IoLogOutOutline, 
-    IoPersonOutline 
+    IoPersonOutline,
+    IoMailOutline
 } from 'react-icons/io5';
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
@@ -28,7 +29,8 @@ const SettingsComponent = () => {
                 ? 
                 <div className={styles.loggedIn}>
                     <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
-                    <Link href={`/user-dashboard/${ userId }`}><a className={styles.profile}><IoPersonOutline /></a></Link> 
+                    <p className={styles.profile}><IoMailOutline /></p>
+                    <Link href={`/user-dashboard/${ userId }`}><a className={styles.profile}><IoPersonOutline /></a></Link>               
                 </div> 
                 : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 
             }       

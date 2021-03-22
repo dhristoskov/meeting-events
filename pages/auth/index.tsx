@@ -30,10 +30,11 @@ const Register = () => {
         axios.post<UserResponse>('/api/auth/user-register', user, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
+                showNotification({message: 'Registered successfully', type: 'success'});
                 login(res.data.userId, res.data.token, res.data.username);
                 router.push('/');
              }).catch(err => {
-                console.log(err.response.data.msg);
+                showNotification({message: err.response.data.msg, type: 'alert'});
              });
     };
 

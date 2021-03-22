@@ -28,7 +28,7 @@ const NotificationProvider: React.FC<Props> = ({ children }) => {
         if(activeNotification){
             const timer = setTimeout(() => {
                 setActiveNotification(null);
-            }, 4000);
+            }, 2500);
 
             return () => {
                 clearTimeout(timer);

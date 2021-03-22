@@ -20,7 +20,7 @@ const loginHandler = async  (req: NextApiRequest, res: NextApiResponse) => {
         }
     
         if(!user){
-            return res.status(403).json({ msg: 'Invalid credentials, could not log you in.'});
+            return res.status(403).json({ msg: 'Invalid credentials.'});
         }
     
         let isPasswordMatch = false;
@@ -31,7 +31,7 @@ const loginHandler = async  (req: NextApiRequest, res: NextApiResponse) => {
         }
     
         if(!isPasswordMatch){
-            return res.status(403).json({ msg: 'Invalid credentials, could not log you in.'});
+            return res.status(403).json({ msg: 'Invalid credentials.'});
         }
     
         let token: string;

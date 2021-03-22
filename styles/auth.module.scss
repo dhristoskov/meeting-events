@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    margin: 50px auto;
+    margin: 60px auto;
     width: 65%;
 }
 .container {
@@ -45,6 +45,7 @@
             input[type=text],
             input[type=email],
             input[type=password]{
+                color: $icon-dark;
                 width: 100%;
                 border: none;
                 outline: none;
