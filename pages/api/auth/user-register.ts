@@ -52,7 +52,7 @@ const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) =>
     let token: string;
     try{
         token = jwt.sign(
-            { userId: user.id, username: user.username },
+            { userId: user.id },
             process.env.JWT_SECRET, 
             { expiresIn: '1h' });
     }catch(err){

@@ -47,6 +47,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
            username: username, 
            expiration: tokenExpirationTime.toISOString() }
         ));
+        router.replace('/');
       }, []);
 
       const logout = useCallback((): void => {

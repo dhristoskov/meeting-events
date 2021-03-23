@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { 
     IoBulbOutline, 
@@ -13,12 +12,12 @@ import {
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
 import { AuthContext } from 'context/auth-context/AuthContext';
+import IconCompnent from './IconComponent';
 
 import styles from '@/styles/header.module.scss';
 
 const SettingsComponent = () => {
-
-    const router = useRouter();
+    
     const { isLoggedIn, logout, userId } = useContext(AuthContext);
     const { isLight, onThemeChanger } = useContext(ThemeContext);
 
@@ -29,16 +28,24 @@ const SettingsComponent = () => {
                 ? 
                 <div className={styles.loggedIn}>
                     <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
-                    <p className={styles.profile}><IoMailOutline /></p>
-                    <Link href={`/user-dashboard/${ userId }`}><a className={styles.profile}><IoPersonOutline /></a></Link>               
+                    <IconCompnent>
+                        <Link href={`/user-dashboard/messages`}>
+                            <a className={styles.profile}><IoMailOutline /></a>
+                        </Link>
+                    </IconCompnent>
+                    <IconCompnent>
+                        <Link href={`/user-dashboard/${ userId }`}>
+                            <a className={styles.profile}><IoPersonOutline /></a>
+                        </Link>
+                    </IconCompnent>           
                 </div> 
                 : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 
             }       
             <motion.p 
             className={styles.icon} 
             onClick={onThemeChanger}
-            whileHover={{ scale: 1.1, originY: 0, transition: { duration: .3 } }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05, originY: 0, transition: { duration: .3 } }}
+            whileTap={{ scale: 0.95 }}
             >
             { !isLight 
              ? <IoBulbSharp className={styles.light}/>

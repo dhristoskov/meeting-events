@@ -1,6 +1,5 @@
 import { useState, useContext, Fragment } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import RegisterComponent from '@/components/auth-component/RegisterComponent';
@@ -22,7 +21,6 @@ interface UserResponse {
 const Register = () => {
 
     const { showNotification } = useContext(Notification);
-    const router = useRouter();
     const { login } = useContext(AuthContext);
     const [ isLogin, setIsLogin ] = useState<boolean>(true);
 
@@ -32,7 +30,6 @@ const Register = () => {
              .then(res => {
                 showNotification({message: 'Registered successfully', type: 'success'});
                 login(res.data.userId, res.data.token, res.data.username);
-                router.push('/');
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });
@@ -44,7 +41,6 @@ const Register = () => {
              .then(res => {
                 showNotification({message: 'Login successfully', type: 'success'});
                 login(res.data.userId, res.data.token, res.data.username);
-                router.push('/');
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });
@@ -57,7 +53,11 @@ const Register = () => {
     return(
         <Fragment>
             <div className={styles.register}>
-            <Image src='/icons/register.svg' alt={'register'} width={320} height={320}/>
+                {
+                    isLogin 
+                    ? <Image src='/icons/register.svg' alt={'register'} width={320} height={320}/>
+                    : <Image src='/icons/login.svg' alt={'login'} width={320} height={320}/>
+                }   
                 {
                     isLogin 
                     ? <LoginComponent switchLogin={switchLogin} onLoginHandler={onLoginHandler}/>

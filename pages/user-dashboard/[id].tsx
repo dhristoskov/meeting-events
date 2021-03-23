@@ -1,4 +1,4 @@
-import { GetServerSideProps  } from 'next';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -47,6 +47,6 @@ export const getServerSideProps: GetServerSideProps  = async ({ params }) => {
         }
     }
     return {
-       props: { user: response.data.user },
+       props: { user: response.data.user }
     };
 }
