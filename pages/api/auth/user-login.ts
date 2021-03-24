@@ -44,7 +44,7 @@ const loginHandler = async  (req: NextApiRequest, res: NextApiResponse) => {
             res.status(500).send({ msg: 'Server Error' });
         };
     
-        res.json({userId: user.id, username: user.username, token: token});
+        res.json({ token: token });
     }
 };
 

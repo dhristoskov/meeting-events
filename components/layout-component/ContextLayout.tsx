@@ -11,7 +11,7 @@ const ContextLayout: React.FC<Props> = ({ children }) => {
     return (
         <ThemeContextProvider>
             <NotificationProvider>
-                    { children }
+                    { children }  
             </NotificationProvider>
         </ThemeContextProvider>
     )

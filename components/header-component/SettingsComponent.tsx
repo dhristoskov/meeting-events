@@ -18,7 +18,7 @@ import styles from '@/styles/header.module.scss';
 
 const SettingsComponent = () => {
     
-    const { isLoggedIn, logout, userId } = useContext(AuthContext);
+    const { isLoggedIn, logout } = useContext(AuthContext);
     const { isLight, onThemeChanger } = useContext(ThemeContext);
 
     return (
@@ -34,7 +34,7 @@ const SettingsComponent = () => {
                         </Link>
                     </IconCompnent>
                     <IconCompnent>
-                        <Link href={`/user-dashboard/${ userId }`}>
+                        <Link href={`/user-dashboard`}>
                             <a className={styles.profile}><IoPersonOutline /></a>
                         </Link>
                     </IconCompnent>           

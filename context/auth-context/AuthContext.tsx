@@ -1,5 +1,6 @@
 import { createContext, useState, useCallback, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import cookie from 'js-cookie';
 
 interface Props {
     children: ReactNode;
@@ -7,62 +8,53 @@ interface Props {
 
 interface Auth {
     isLoggedIn: boolean;
-    userId: string;
     token: string;
-    username: string;
-    login: (uid: string, token: string, username: string, expirInTime?: Date ) => void;
+    login: (token: string, expirInTime?: Date ) => void;
     logout: () => void;
 };
 
 export const AuthContext = createContext<Auth>(
     {
-        isLoggedIn: false,
-        userId: null,
-        token: null,
-        username: null,
+      isLoggedIn: false,
+      token: null
     } as Auth);
 
-let logoutTimer;
+let logoutTimer: any;
 
 const AuthContextProvider: React.FC<Props> = ({ children }) => {
 
     const router = useRouter();
     const [token, setToken] = useState<string>(null);
-    const [userId, setUserId] = useState<string>(null);
-    const [username, setUsername] = useState<string>(null)
     const [expirTime, setExpTimer] = useState<Date>(null);
 
-    const login = useCallback((uid: string, token: string, username: string, expirInTime?: Date ): void => {
+    const login = useCallback((token: string, expirInTime?: Date ): void => {
         setToken(token);
-        setUserId(uid);
-        setUsername(username)
         const tokenExpirationTime = expirInTime || new Date(new Date().getTime() + 1000 * 60 * 60);
         setExpTimer(tokenExpirationTime);
     
         localStorage.setItem
         ('userData', 
         JSON.stringify(
-          {userId: uid,
-           token: token,
-           username: username, 
-           expiration: tokenExpirationTime.toISOString() }
+          { 
+            token: token,
+            expiration: tokenExpirationTime.toISOString() }
         ));
+        cookie.set('token', token, { expires: tokenExpirationTime });
         router.replace('/');
       }, []);
 
       const logout = useCallback((): void => {
-        setToken(null);
-        setUserId(null);
-        setUsername(null);
+        setToken(null);;
         setExpTimer(null);
         localStorage.removeItem('userData');
+        cookie.remove('token');
         router.replace('/');
       }, []);
 
       useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('userData'));
         if (storedData && storedData.token && new Date(storedData.expiration) > new Date() ) {
-          login(storedData.userId, storedData.token, storedData.username, new Date(storedData.expiration));
+          login(storedData.token, new Date(storedData.expiration));
         }
       }, [login]);
     
@@ -80,8 +72,6 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
         <AuthContext.Provider value={{
             isLoggedIn: !!token,
             token,
-            userId,
-            username,
             login,
             logout
         }}>

@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -31,14 +32,14 @@ const UserProfilePage: React.FC<Props> = ({ user }) => {
 
 export default UserProfilePage;
 
-export const getServerSideProps: GetServerSideProps  = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps  = async (ctx) => {
 
-    const { id } = params;
-    const url = `http://localhost:3000/api/user-profile/${id}`;
+    const { token } = parseCookies(ctx);
+    const url = `http://localhost:3000/api/user-profile/profile`;
 
-    const response = await axios.get(url);
+    const response = await axios.get(url, { headers: { Authorization: token } });
     
-    if (!response) {
+    if ( !response || !token ) {
         return {
           redirect: {
             destination: '/',
@@ -46,7 +47,8 @@ export const getServerSideProps: GetServerSideProps  = async ({ params }) => {
           },
         }
     }
+
     return {
-       props: { user: response.data.user }
+       props: {  user: response.data.user }
     };
 }

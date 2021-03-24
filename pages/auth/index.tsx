@@ -12,9 +12,7 @@ import { LoginUser } from 'interfaces/loginUser';
 import styles from '@/styles/auth.module.scss';
 
 interface UserResponse {
-    userId: string;
     token: string;
-    username: string;
     expirInTime?: Date;
 }
 
@@ -29,7 +27,7 @@ const Register = () => {
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 showNotification({message: 'Registered successfully', type: 'success'});
-                login(res.data.userId, res.data.token, res.data.username);
+                login( res.data.token );
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });
@@ -40,7 +38,7 @@ const Register = () => {
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 showNotification({message: 'Login successfully', type: 'success'});
-                login(res.data.userId, res.data.token, res.data.username);
+                login(res.data.token);
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });
