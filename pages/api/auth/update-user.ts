@@ -1,15 +1,24 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import jwt from 'jsonwebtoken';
 import isEmail from 'validator/lib/isEmail';
 
 import connectDB from "middleware/mongoose";
 import { UserInterface } from 'interfaces/user';
 import User from 'models/user';
 
+interface StoredTokenData {
+    userId: string;
+};
+
 const updateUser = async  (req: NextApiRequest, res: NextApiResponse)  => {
 
     if(req.method === 'PUT') {
 
-        const { email, id } = req.body;
+        if (!('authorization' in req.headers)) {
+            return res.status(401).send('No authorization token');
+        }
+
+        const { email } = req.body;
 
         if (!isEmail(email)) {
             return res.status(422).send('Email must be valid address');
@@ -17,7 +26,12 @@ const updateUser = async  (req: NextApiRequest, res: NextApiResponse)  => {
 
         let user: UserInterface | null = null;
         try{
-            user = await User.findOne({ _id: id });
+            const { userId } = jwt.verify(
+                req.headers.authorization,
+                process.env.JWT_SECRET
+            ) as StoredTokenData;
+
+            user = await User.findOne({ _id: userId });
         }catch(err){
             res.status(500).send({ msg: 'Server Error, could not find the user' });
         }

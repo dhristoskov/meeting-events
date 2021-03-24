@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 
 const userSchema = new mongoose.Schema({
     username: { 
@@ -35,7 +35,12 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now()
-    }
+    },
+    messages: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true,
+        ref: 'Message'
+    }]
 });
 
 let User = mongoose.models.User || mongoose.model<UserInterface>('User', userSchema);

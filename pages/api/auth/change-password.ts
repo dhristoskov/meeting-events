@@ -1,16 +1,25 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import jwt from 'jsonwebtoken';
 import isLength from 'validator/lib/isLength';
 import bcrypt from 'bcrypt';
 
 import connectDB from 'middleware/mongoose';
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 import User from 'models/user';
+
+interface StoredTokenData {
+    userId: string;
+};
 
 const changePassword = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if(req.method === 'PUT') {
         
-        const { password2, password, id } = req.body;
+        if (!('authorization' in req.headers)) {
+            return res.status(401).send('No authorization token');
+        }
+
+        const { password2, password } = req.body;
 
         if (!isLength(password, { min: 7 })) {
             return res.status(422).send('Password must be at least 7 characters');
@@ -18,7 +27,12 @@ const changePassword = async (req: NextApiRequest, res: NextApiResponse) => {
 
         let user: UserInterface | null = null;
         try{
-            user = await User.findOne({ _id: id });
+            const { userId } = jwt.verify(
+                req.headers.authorization,
+                process.env.JWT_SECRET
+            ) as StoredTokenData;
+
+            user = await User.findOne({ _id: userId });
         }catch(err){
             res.status(500).send({ msg: 'Server Error, could not find the user' });
         }

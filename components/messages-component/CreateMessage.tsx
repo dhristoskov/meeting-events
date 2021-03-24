@@ -1,11 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 
-import { MessageInterface } from 'interfaces/messageSend';
+import { MessageSend } from 'interfaces/messageSend';
 import styles from '@/styles/message.module.scss';
 
-const CreateMessage = () => {
+interface Props {
+    sendEmailHandler: (emailData: MessageSend) => void;
+}
 
-    const [ message, setMessage ] = useState<MessageInterface>({
+const CreateMessage: React.FC<Props> = ({ sendEmailHandler }) => {
+
+    const [ message, setMessage ] = useState<MessageSend>({
         toPerson: '',
         title: '',
         content: ''
@@ -20,7 +24,7 @@ const CreateMessage = () => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault(); 
-        console.log(message);
+        sendEmailHandler(message);
         setMessage({
             toPerson: '',
             title: '',

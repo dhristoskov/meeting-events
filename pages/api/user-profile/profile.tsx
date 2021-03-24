@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 
 import connectDB from '../../../middleware/mongoose';
 import User from '../../../models/user';
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 
 interface StoredTokenData {
     userId: string;
-}
+};
 
 const userByIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 

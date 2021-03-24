@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import connectDB from 'middleware/mongoose';
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 import User from 'models/user';
 
 const loginHandler = async  (req: NextApiRequest, res: NextApiResponse) => {

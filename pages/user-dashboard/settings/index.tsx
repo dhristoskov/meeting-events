@@ -1,44 +1,47 @@
 import { Fragment, useContext } from 'react';
 import axios from 'axios';
+import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 
 import ChangePassword from '@/components/auth-component/ChangePassword';
 import ChangeEmail from '@/components/auth-component/ChangeEmail';
-import { AuthContext } from 'context/auth-context/AuthContext';
-import { UserInterface } from 'interfaces/user';
+import UserInterface  from 'interfaces/user';
 import { Notification } from 'context/notification-context/Notification';
 
 const UserSettings = () => {
 
     const router = useRouter();
     const { showNotification } = useContext(Notification);
-    const { userId } = useContext(AuthContext);
-
 
     const changePasswordHandler = (userData: {password2: string, password: string }) => {
-        const newData = {...userData,  id : userId }
-        axios.put<{msg: string}>('/api/auth/change-password', newData, 
-        { headers: {'Content-Type': 'application/json'}})
+        const token = cookie.get('token');
+        axios.put<{msg: string}>('/api/auth/change-password', userData, 
+            { headers: 
+                { 
+                    Authorization: token, 
+                    'Content-Type': 'application/json'
+                } 
+            })
              .then(res => {
-                router.push({
-                    pathname: '/user-dashboard/[id]', 
-                    query: { id: userId }
-                });
+                showNotification({message: 'Password changed', type: 'succses'})
+                router.push('/user-dashboard');
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });
     }
 
-    const changeEmailHandler = (emailData: { email: string }) => {
-        const newData = {...emailData,  id : userId }
-        axios.put<UserInterface>('/api/auth/update-user', newData, 
-        { headers: {'Content-Type': 'application/json'}})
+    const changeEmailHandler = (emailData: { email: string }) => { 
+        const token = cookie.get('token');
+        axios.put<UserInterface>('/api/auth/update-user', emailData, 
+            { headers: 
+                { 
+                    Authorization: token, 
+                    'Content-Type': 'application/json'
+                } 
+            })
              .then(res => {
                 showNotification({message: 'Email changed', type: 'succses'})
-                router.push({
-                    pathname: '/user-dashboard/[id]', 
-                    query: { id: userId }
-                });
+                router.push('/user-dashboard');
              }).catch(err => {
                 showNotification({message: err.response.data.msg, type: 'alert'});
              });

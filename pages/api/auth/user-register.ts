@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 import connectDB from '../../../middleware/mongoose';
 import User from '../../../models/user';
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 
 const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -41,7 +41,8 @@ const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) =>
     try{
         user = new User({
           username,
-          password: hashedPassword
+          password: hashedPassword,
+          messages: []
         });
 
         await user.save();

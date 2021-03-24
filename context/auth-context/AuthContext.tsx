@@ -54,7 +54,15 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
       useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('userData'));
         if (storedData && storedData.token && new Date(storedData.expiration) > new Date() ) {
-          login(storedData.token, new Date(storedData.expiration));
+
+          setToken(storedData.token)
+          localStorage.setItem
+            ('userData', 
+            JSON.stringify(
+              { 
+                token: storedData.token,
+                expiration: new Date(storedData.expiration)}
+          ));
         }
       }, [login]);
     
