@@ -3,7 +3,7 @@ import { parseCookies } from 'nookies';
 import Link from 'next/link';
 import axios from 'axios';
 
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 
 import styles from '@/styles/dashboard.module.scss';
 

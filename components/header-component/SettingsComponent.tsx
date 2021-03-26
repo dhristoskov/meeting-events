@@ -29,7 +29,7 @@ const SettingsComponent = () => {
                 <div className={styles.loggedIn}>
                     <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
                     <IconCompnent>
-                        <Link href={`/user-dashboard/messages`}>
+                        <Link href={`/`}>
                             <a className={styles.profile}><IoMailOutline /></a>
                         </Link>
                     </IconCompnent>
