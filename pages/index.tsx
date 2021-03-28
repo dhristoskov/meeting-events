@@ -1,12 +1,12 @@
-import { DateComparer } from "@/components/utils/dateComparer";
+// import { DateComparer } from "@/components/utils/dateComparer";
+import { NextPage } from "next";
 
-const Home = () =>  {
+const Home: NextPage = () =>  {
 
-  const date = DateComparer(new Date('2021-03-18'));
+  // const date = DateComparer(new Date('2021-03-18'));
 
   return (
     <div>
-      <p>{date}</p>
       <p>This is home page</p>
     </div>
   )

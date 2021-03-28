@@ -1,13 +1,12 @@
 import * as mongoose from 'mongoose';
 
-import UserInterface from 'interfaces/user';
+import RestaurantInterface from 'interfaces/restaurant';
 
-const userSchema = new mongoose.Schema({
-    username: { 
+const restaurantSchema = new mongoose.Schema({
+    name: { 
         type: String, 
         required: true,
-        minlength: 3,
-        maxlength: 20
+        minlength: 2,
     },
     email: {
         type: String, 
@@ -15,21 +14,20 @@ const userSchema = new mongoose.Schema({
         default: 'no-data',
         minlength: 6
     },
-    avatar: {
+    urlAddress: {
         type: String, 
         required: false,
         default: 'no-data'
     },
-    password: { 
+    location: { 
         type: String, 
-        required: true,
-        minlength: 7
+        required: true
     },
-    role: {
+    description: {
         type: String,
         required: true,
-        default: 'user',
-        enum: [ 'user',  'creator', 'admin' ] 
+        default: 'no-data',
+        minlength: 10
     },
     created: {
         type: Date,
@@ -38,5 +36,5 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-let User = mongoose.models.User || mongoose.model<UserInterface>('User', userSchema);
-export default User;
+let Restaurant = mongoose.models.Restaurant || mongoose.model<RestaurantInterface>('Restaurant', restaurantSchema);
+export default Restaurant;

@@ -1,7 +1,5 @@
 import * as mongoose from 'mongoose';
 
-import MessageInterface from './message';
-
 export default interface UserInterface extends mongoose.Document{
     username: string
     email?: string;
@@ -9,5 +7,4 @@ export default interface UserInterface extends mongoose.Document{
     password: string;
     role: string;
     created: Date;
-    messages: MessageInterface[];
 }

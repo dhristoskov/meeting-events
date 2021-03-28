@@ -16,7 +16,6 @@ const connectDB = ( handler: any ) => async (req: NextApiRequest, res: NextApiRe
                 useNewUrlParser: true
             });
     }catch(err){
-        console.error(err.message);
         process.exit(1);
     }
 

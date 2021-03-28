@@ -2,13 +2,14 @@ import { Fragment, useContext } from 'react';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
+import { NextPage } from 'next';
 
 import ChangePassword from '@/components/auth-component/ChangePassword';
 import ChangeEmail from '@/components/auth-component/ChangeEmail';
 import UserInterface  from 'interfaces/user';
 import { Notification } from 'context/notification-context/Notification';
 
-const UserSettings = () => {
+const UserSettings: NextPage = () => {
 
     const router = useRouter();
     const { showNotification } = useContext(Notification);
@@ -32,7 +33,7 @@ const UserSettings = () => {
 
     const changeEmailHandler = (emailData: { email: string }) => { 
         const token = cookie.get('token');
-        axios.put<UserInterface>('/api/auth/update-user', emailData, 
+        axios.put<{msg: string}>('/api/auth/update-user', emailData, 
             { headers: 
                 { 
                     Authorization: token, 

@@ -1,4 +1,5 @@
 import { useState, useContext, Fragment } from 'react';
+import { NextPage } from 'next';
 import Image from 'next/image';
 import axios from 'axios';
 
@@ -11,12 +12,13 @@ import { LoginUser } from 'interfaces/loginUser';
 
 import styles from '@/styles/auth.module.scss';
 
+
 interface UserResponse {
     token: string;
     expirInTime?: Date;
 }
 
-const Register = () => {
+const Register: NextPage = () => {
 
     const { showNotification } = useContext(Notification);
     const { login } = useContext(AuthContext);
@@ -62,12 +64,8 @@ const Register = () => {
                     : <RegisterComponent onRegisterHandler={onRegisterHandler} switchLogin={switchLogin}/>
                 }
              </div>
-        </Fragment>
-
-
-        
+        </Fragment>  
     )
-
 }
 
 export default Register;

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import isEmail from 'validator/lib/isEmail';
 
 import connectDB from "middleware/mongoose";
-import { UserInterface } from 'interfaces/user';
+import UserInterface from 'interfaces/user';
 import User from 'models/user';
 
 interface StoredTokenData {

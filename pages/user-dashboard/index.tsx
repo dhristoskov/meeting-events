@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { parseCookies } from 'nookies';
 import Link from 'next/link';
 import axios from 'axios';
@@ -11,7 +11,7 @@ interface Props {
     user: UserInterface;
 }
 
-const UserProfilePage: React.FC<Props> = ({ user }) => {
+const UserProfilePage: NextPage<Props> = ({ user }) => {
 
     const date = new Date(user.created).toLocaleDateString('en-GB')
 
@@ -32,7 +32,7 @@ const UserProfilePage: React.FC<Props> = ({ user }) => {
 
 export default UserProfilePage;
 
-export const getServerSideProps: GetServerSideProps  = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<Props>  = async (ctx) => {
 
     const { token } = parseCookies(ctx);
     const url = `http://localhost:3000/api/user-profile/profile`;
