@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import RestaurantInterface from 'interfaces/restaurant';
 import ReservationForm from '@/components/reservation-component/ReservationForm';
 import { AuthContext } from 'context/auth-context/AuthContext';
+import CostumerStats from './CostumerStats';
 import ButtonOptions from './ButtonOptions';
 
 import styles from '@/styles/restaurant.module.scss';
@@ -31,6 +32,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant }) => {
             <div className={styles.upper}>
                 <div className={styles.info}>
                     <h3 className={styles.uppername}>{ restaurant.name }</h3>
+                    <CostumerStats />
                     <p className={styles.description}>{ restaurant.description }</p>
                     <ButtonOptions addToFavorites={addToFavorites}/>     
                 </div>

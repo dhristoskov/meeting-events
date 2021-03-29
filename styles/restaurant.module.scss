@@ -16,6 +16,17 @@
         .info {
             width: 40%;
 
+            .states{
+                margin-top: 15px;
+                display: flex;
+                align-items: center;
+                .stars {
+                    font-size: 20px;
+                    color: $icon-light;
+                    margin-right: 10px;
+                }
+            }
+        
             .buttons {
                 margin-top: 25px;
                 display: flex;
