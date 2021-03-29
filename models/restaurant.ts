@@ -8,6 +8,10 @@ const restaurantSchema = new mongoose.Schema({
         required: true,
         minlength: 2,
     },
+    img: {
+        type: String,
+        require: false
+    },
     email: {
         type: String, 
         required: false,

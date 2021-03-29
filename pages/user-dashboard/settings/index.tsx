@@ -6,7 +6,6 @@ import { NextPage } from 'next';
 
 import ChangePassword from '@/components/auth-component/ChangePassword';
 import ChangeEmail from '@/components/auth-component/ChangeEmail';
-import UserInterface  from 'interfaces/user';
 import { Notification } from 'context/notification-context/Notification';
 
 const UserSettings: NextPage = () => {
