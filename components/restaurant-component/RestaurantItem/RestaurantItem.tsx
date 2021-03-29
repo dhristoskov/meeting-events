@@ -1,11 +1,13 @@
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 
 import RestaurantInterface from 'interfaces/restaurant';
+import ReservationForm from '@/components/reservation-component/ReservationForm';
 import { AuthContext } from 'context/auth-context/AuthContext';
+import ButtonOptions from './ButtonOptions';
 
 import styles from '@/styles/restaurant.module.scss';
-import { useRouter } from 'next/router';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -28,9 +30,9 @@ const RestaurantItem: NextPage<Props> = ({ restaurant }) => {
         <div className={styles.main}>
             <div className={styles.upper}>
                 <div className={styles.info}>
-                    <h3 className={styles.name}>{ restaurant.name }</h3>
-                    <p>Reviews</p>
-                    <button onClick={addToFavorites}>Favorites</button>
+                    <h3 className={styles.uppername}>{ restaurant.name }</h3>
+                    <p className={styles.description}>{ restaurant.description }</p>
+                    <ButtonOptions addToFavorites={addToFavorites}/>     
                 </div>
                 <div className={styles.imageContainer}>
                     <img className={ styles.img } src={ restaurant.img } alt={ restaurant.name }/>
@@ -38,10 +40,9 @@ const RestaurantItem: NextPage<Props> = ({ restaurant }) => {
             </div>
             <div className={styles.middle}>
                 <div className={ styles.reservation }>
-                    Reservation
-                    <p className={styles.description}>{ restaurant.description }</p>
+                    <ReservationForm />
                 </div>
-                <div>
+                <div className={styles.moreinfo}>
                     <p>Google Maps</p>
                     <h3 className={styles.name}>{ restaurant.name }</h3>
                     <p className={styles.location}>{restaurant.location}</p>
@@ -49,6 +50,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant }) => {
                     <p className={styles.email}>{restaurant.email}</p>
                 </div>
             </div>
+            <div>Our Menu</div>
         </div>
     )
 }

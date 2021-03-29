@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import axios from 'axios';
 
 import RestaurantInterface from "interfaces/restaurant";
-import RestaurantItem from "@/components/restaurant/RestaurantItem/RestaurantItem";
+import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
 
 interface Props {
     restaurant: RestaurantInterface;

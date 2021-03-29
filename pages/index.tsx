@@ -2,7 +2,7 @@ import { NextPage, GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import axios from 'axios';
 
-import RestaurantCard from "@/components/restaurant/RestaurantCard";
+import RestaurantCard from "@/components/restaurant-component/RestaurantCard";
 import RestaurantInterface from "interfaces/restaurant";
 
 import styles from '@/styles/restaurant.module.scss';
