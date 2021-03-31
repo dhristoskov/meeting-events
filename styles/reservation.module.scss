@@ -1,0 +1,51 @@
+@import './color-variable.scss';
+
+.container{
+    width: 100%;
+    color: black;
+
+    .title {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .subtext {
+        text-align: center;
+        font-weight: 600;
+        font-size: 16px;
+        color: $icon-active;
+        margin: 5px 0 15px 0;
+    }
+
+    .form {
+        width: 70%;
+        height: 250px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        input[type=text]{
+            color: $icon-dark;
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 10px 0 3px 5px;
+            background-color: transparent;
+            border-bottom: 2px solid $icon-light;
+        }
+
+        input[type=submit]{
+            width: 100%;
+            font-weight: 600;
+            padding: 10px 0;
+            margin: 15px 0 50px 0;
+            outline: none;
+            background-color: transparent;
+            border: 2px solid $icon-light;
+            color: $icon-light;
+            cursor: pointer;
+        }
+    }
+}

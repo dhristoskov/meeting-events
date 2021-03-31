@@ -33,6 +33,11 @@ const restaurantSchema = new mongoose.Schema({
         default: 'no-data',
         minlength: 10
     },
+    reservations: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'Reservation'
+    }],
     created: {
         type: Date,
         required: true,

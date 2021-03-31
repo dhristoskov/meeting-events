@@ -42,7 +42,8 @@ const registrationHandler = async (req: NextApiRequest, res: NextApiResponse) =>
         user = new User({
           username,
           password: hashedPassword,
-          messages: []
+          reservations: [],
+          favorites: []
         });
 
         await user.save();

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import PasswordField from '@/components/auth-component/PasswordField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
+import TextInputField from './TextInputField';
 import { LoginUser } from 'interfaces/loginUser';
 
 import styles from '@/styles/auth.module.scss';
@@ -40,10 +41,12 @@ const LoginComponent: React.FC<Props> = ({ switchLogin, onLoginHandler }) => {
             <h3>Log-In</h3>
             <p className={styles.subtext}>enter your credentials to log-in</p>
             <form className={styles.form} onSubmit={onHandleSubmit}>
-                <div className={styles.field}>
-                    <input type='text' name='username' placeholder='Username'  
-                    value={username} onChange={onHandleChange} />
-                </div>
+                <TextInputField 
+                    name={'username'}
+                    placeholder={'Username'}
+                    onHandleChange={onHandleChange} 
+                    value={username}
+                />
                 <PasswordField onHandleChange={onHandleChange} value={password} />
                 <SubmitButton name={'Log-in'} />
             </form>

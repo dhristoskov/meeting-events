@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 
+import ReservationInterface from './reservation';
 import RestaurantInterface from './restaurant';
 
 export default interface UserInterface extends mongoose.Document{
@@ -8,6 +9,7 @@ export default interface UserInterface extends mongoose.Document{
     avatar: string;
     password: string;
     role: string;
-    favorites: RestaurantInterface[]
+    favorites: RestaurantInterface[];
+    reservations: ReservationInterface[];
     created: Date;
 }

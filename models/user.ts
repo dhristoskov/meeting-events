@@ -36,6 +36,11 @@ const userSchema = new mongoose.Schema({
         required: true, 
         ref: 'Restaurant'
     }],
+    reservations: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'Reservation'
+    }],
     created: {
         type: Date,
         required: true,

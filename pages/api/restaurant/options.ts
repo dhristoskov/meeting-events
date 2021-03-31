@@ -65,7 +65,8 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             email, 
             urlAddress, 
             location, 
-            description
+            description,
+            reservations: []
         });
     
         await restaurant.save();

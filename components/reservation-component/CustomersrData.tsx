@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 
 import SubmitButton from '@/components/auth-component/SubmitButton';
 import { ValidateInput } from '@/components/utils/formValidator';
+import TextInputField from '../auth-component/TextInputField';
 import EmailField from '../auth-component/EmailField';
 
 import styles from '@/styles/reservation.module.scss';
@@ -46,25 +47,29 @@ const CustomersData: NextPage<Props> = ({ reservationDate, guests, onReservation
     };
 
     return (
-        <div className={styles.container} style={{ color: 'black'}}>
-            <div>
+        <div className={styles.container}>
+            <div className={styles.rsrvData}>
                 <p>Date: { reservationDate.toLocaleDateString('de-DE',  { weekday: 'long', day:'numeric', month: 'long', year: 'numeric' }) }</p>
                 <p>Time: { reservationDate.toLocaleTimeString('de-DE', {hour: '2-digit', minute:'2-digit'}) }</p>
                 <p>Guests: { guests }</p>
             </div>
-            <h4 className={styles.title}>Continue reservation as a Guset</h4>
-            <p className={styles.subtext}>or Login first</p>
+            <h4 className={styles.title}>Continue your reservation as a Guset or Login first</h4>
+            <p className={styles.subtext}>Enter reservation details</p>
             <form className={styles.form} onSubmit={onHandleSubmit}>
-                <div className={styles.field}>
-                    <input type='text' name='first_name' placeholder='First Name'  
-                    value={first_name} onChange={onHandleChange} />
-                    {errors.first_name && <p className={styles.errors}>{errors.first_name}</p>}
-                </div>
-                <div className={styles.field}>
-                    <input type='text' name='last_name' placeholder='Last Name'  
-                    value={last_name} onChange={onHandleChange} />
-                    {errors.last_name && <p className={styles.errors}>{errors.last_name}</p>}
-                </div>
+                <TextInputField 
+                    name={'first_name'}
+                    placeholder={'First Name'}
+                    onHandleChange={onHandleChange} 
+                    value={first_name} 
+                    errors={errors.first_name}
+                />
+                 <TextInputField 
+                    name={'last_name'}
+                    placeholder={'Last Name'}
+                    onHandleChange={onHandleChange} 
+                    value={last_name} 
+                    errors={errors.last_name}
+                />
                 <EmailField onHandleChange={onHandleChange} value={email} errors={errors.email}/>
                 <SubmitButton name={'Reservation'} errors={errors}/>
             </form>
