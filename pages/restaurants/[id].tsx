@@ -5,6 +5,7 @@ import axios from 'axios';
 import RestaurantInterface from "interfaces/restaurant";
 import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
 import ReservationModal from "@/components/modal-component/ReservationModal";
+import CustomersData from "@/components/reservation-component/CustomersrData";
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -12,26 +13,35 @@ interface Props {
 
 const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
 
-    const [ isVisible, setIsVisible ] = useState<boolean>(false)
-
-    const onModalClose = (): void => {
-      setIsVisible(false);
+    const [ isVisible, setIsVisible ] = useState<boolean>(false);
+    const [ guests, setGuests ] = useState<number>(null);
+    const [ reservationDate, setReservationDate ] = useState<Date>(null);
+    
+    const onModalHandler = (reservationData: {startDate: Date, guests: number}): void => {
+      setReservationDate(reservationData.startDate);
+      setGuests(reservationData.guests);
+      setIsVisible(true);
     };
 
-    const onModalOpen = (): void => {
-      setIsVisible(true);
+    const onReservationHandler = (reservation: any) => {
+      console.log(reservation);
+      setIsVisible(false);
     }
 
     return (
       <div>
         <ReservationModal 
             isVisible={isVisible} 
-            onModalClose={onModalClose}>
-              <p style={{color: 'black'}}>Modal one</p>
+            setIsVisible={setIsVisible}>
+              <CustomersData 
+                reservationDate={reservationDate} 
+                guests={guests} 
+                onReservationHandler={onReservationHandler}
+              />
         </ReservationModal>
         <RestaurantItem 
             restaurant={restaurant} 
-            onModalOpen={onModalOpen}
+            onModalHandler={onModalHandler}
         />
       </div>
         

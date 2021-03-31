@@ -12,10 +12,10 @@ import styles from '@/styles/restaurant.module.scss';
 
 interface Props {
     restaurant: RestaurantInterface;
-    onModalOpen: () => void;
+    onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
 }
 
-const RestaurantItem: NextPage<Props> = ({ restaurant, onModalOpen }) => {
+const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
 
     const { isLoggedIn } = useContext(AuthContext);
     const router = useRouter();
@@ -26,15 +26,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalOpen }) => {
         }else{
             router.push('/auth');
         }
-    }
-
-    const onReservationHandler = () => {
-        if(isLoggedIn){
-            router.push('/');
-        }else{
-            onModalOpen();
-        }
-    }
+    };
 
     return (
         <div className={styles.main}>
@@ -51,7 +43,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalOpen }) => {
             </div>
             <div className={styles.middle}>
                 <div className={ styles.reservation }>
-                    <ReservationForm onReservationHandler={onReservationHandler}/>
+                    <ReservationForm onModalHandler={onModalHandler}/>
                 </div>
                 <div className={styles.moreinfo}>
                     <p>Google Maps</p>

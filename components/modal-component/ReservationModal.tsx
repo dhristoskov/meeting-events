@@ -9,22 +9,22 @@ import styles from '@/styles/modal.module.scss';
 interface Props {
     children: ReactNode;
     isVisible: boolean;
-    onModalClose: () => void;
+    setIsVisible: (state: boolean) => void;
 };
 
-const ReservationModal: NextPage<Props> = ({ isVisible, children, onModalClose }) => {
+const ReservationModal: NextPage<Props> = ({ isVisible, children, setIsVisible }) => {
 
     return(
         <Fragment>
             {
             isVisible  &&  
             <Fragment>
-                <Overlay onModalClose={onModalClose}/>
+                <Overlay setIsVisible={setIsVisible}/>
                 <motion.div 
                     className={styles.modal}
                     initial={{ opacity: 0}}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: .8 }}
+                    transition={{ duration: 1 }}
                     >
                     { children }
                 </motion.div>

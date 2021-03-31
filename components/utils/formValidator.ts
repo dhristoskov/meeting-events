@@ -6,6 +6,8 @@ export const EmailValidator: RegExp = RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\
 export const  ValidateInput = (name: string, value: string): Errors => {
 
         let errors: Errors = {
+            first_name: '',
+            last_name: '',
             username: '',
             email: '',
             password: '',
@@ -13,6 +15,16 @@ export const  ValidateInput = (name: string, value: string): Errors => {
         };
 
         switch(name){ 
+            case 'first_name':
+                    errors.first_name = value.length < 2
+                    ? 'First name must be at least 2 characters long!'
+                    : '';
+                    break; 
+            case 'last_name':
+                    errors.last_name = value.length < 3
+                    ? 'Last name must be at least 3 characters long!'
+                    : '';
+                    break; 
             case 'username':
                 errors.username = value.length < 3
                     ? 'Username must be at least 3 characters long!'

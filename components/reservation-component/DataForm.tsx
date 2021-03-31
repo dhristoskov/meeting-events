@@ -16,7 +16,7 @@ const DateForm: NextPage<Props> = ({ startDate, setStartDate }) => {
             onChange={date => setStartDate(date)}
             monthsShown={2}
             timeInputLabel="Time:"
-            dateFormat="dd/MM/yyyy HH:mm"
+            dateFormat="dd MMMM yyyy HH:mm"
             shouldCloseOnSelect={false}
             minDate={new Date()}
             popperPlacement="bottom-start"

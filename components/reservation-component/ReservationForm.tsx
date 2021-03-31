@@ -5,13 +5,11 @@ import DateForm from './DataForm';
 
 import styles from '@/styles/restaurant.module.scss';
 
-
-
 interface Props {
-    onReservationHandler: () => void;
+    onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
   }
 
-const Reservation: NextPage<Props> = ({ onReservationHandler }) => {
+const ReservationForm: NextPage<Props> = ({ onModalHandler }) => {
 
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [ guests, setGuests ] = useState<number>(2);
@@ -23,8 +21,7 @@ const Reservation: NextPage<Props> = ({ onReservationHandler }) => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onReservationHandler()
-        console.log(reservation)
+        onModalHandler(reservation);
     }
 
 
@@ -38,4 +35,4 @@ const Reservation: NextPage<Props> = ({ onReservationHandler }) => {
     )
 }
 
-export default Reservation;
+export default ReservationForm;

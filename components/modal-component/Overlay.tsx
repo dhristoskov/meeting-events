@@ -3,15 +3,15 @@ import { NextPage } from 'next';
 import styles from '@/styles/modal.module.scss';
 
 interface Props {
-    onModalClose: () => void;
+    setIsVisible: (state: boolean) => void;
 };
 
-const Overlay: NextPage<Props> = ({ onModalClose }) => {
+const Overlay: NextPage<Props> = ({ setIsVisible }) => {
 
     return (
         <div 
             className={styles.overlay} 
-            onClick={onModalClose}
+            onClick={() => setIsVisible(false)}
         />
       );
 }
