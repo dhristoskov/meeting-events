@@ -31,6 +31,11 @@ const userSchema = new mongoose.Schema({
         default: 'user',
         enum: [ 'user',  'creator', 'admin' ] 
     },
+    favorites: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'Restaurant'
+    }],
     created: {
         type: Date,
         required: true,

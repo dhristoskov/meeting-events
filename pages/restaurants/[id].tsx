@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { GetServerSideProps, NextPage } from "next";
 import axios from 'axios';
 
 import RestaurantInterface from "interfaces/restaurant";
 import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
+import ReservationModal from "@/components/modal-component/ReservationModal";
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -10,8 +12,29 @@ interface Props {
 
 const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
 
+    const [ isVisible, setIsVisible ] = useState<boolean>(false)
+
+    const onModalClose = (): void => {
+      setIsVisible(false);
+    };
+
+    const onModalOpen = (): void => {
+      setIsVisible(true);
+    }
+
     return (
-        <RestaurantItem restaurant={restaurant} />
+      <div>
+        <ReservationModal 
+            isVisible={isVisible} 
+            onModalClose={onModalClose}>
+              <p style={{color: 'black'}}>Modal one</p>
+        </ReservationModal>
+        <RestaurantItem 
+            restaurant={restaurant} 
+            onModalOpen={onModalOpen}
+        />
+      </div>
+        
     )
 
 }

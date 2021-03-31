@@ -15,8 +15,8 @@ const Home: NextPage<Props> = ({ restaurants }) =>  {
 
   const router = useRouter()
 
-  const onCardOpen = (id: string): void => {
-    router.push(`/restaurants/${id}`)
+  const onCardOpen = async (id: string): void => {
+    await router.push(`/restaurants/${id}`)
   }
 
   return (

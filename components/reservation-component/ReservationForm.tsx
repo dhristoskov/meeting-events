@@ -1,10 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { NextPage } from 'next';
 
 import DateForm from './DataForm';
 
 import styles from '@/styles/restaurant.module.scss';
 
-const Reservation = () => {
+
+
+interface Props {
+    onReservationHandler: () => void;
+  }
+
+const Reservation: NextPage<Props> = ({ onReservationHandler }) => {
 
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [ guests, setGuests ] = useState<number>(2);
@@ -16,6 +23,7 @@ const Reservation = () => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        onReservationHandler()
         console.log(reservation)
     }
 
