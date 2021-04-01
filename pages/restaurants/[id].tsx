@@ -1,31 +1,78 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { GetServerSideProps, NextPage } from "next";
+import cookie from 'js-cookie';
+import { useRouter } from 'next/router'
 import axios from 'axios';
 
 import RestaurantInterface from "interfaces/restaurant";
 import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
 import ReservationModal from "@/components/modal-component/ReservationModal";
 import CustomersData from "@/components/reservation-component/CustomersrData";
+import { Notification } from 'context/notification-context/Notification';
+import { AuthContext } from 'context/auth-context/AuthContext';
+import ReservationData from "interfaces/reservationData";
 
 interface Props {
     restaurant: RestaurantInterface;
-  }
+}
 
 const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
 
+    const router = useRouter();
+    const { id } = router.query;
+
+    const { isLoggedIn } = useContext(AuthContext);
+    const { showNotification } = useContext(Notification);
     const [ isVisible, setIsVisible ] = useState<boolean>(false);
     const [ guests, setGuests ] = useState<number>(null);
     const [ reservationDate, setReservationDate ] = useState<Date>(null);
-    
+
     const onModalHandler = (reservationData: {startDate: Date, guests: number}): void => {
       setReservationDate(reservationData.startDate);
       setGuests(reservationData.guests);
       setIsVisible(true);
     };
 
-    const onReservationHandler = (reservation: any) => {
-      console.log(reservation);
+    const guestReservation = async (reservation: ReservationData) => {
+      const Data = {  id, ...reservation }
+      await axios.post('/api/reservations/guest', Data, 
+        { headers: {'Content-Type': 'application/json'}})
+             .then(res => {
+                showNotification({message: 'Reservation is successfully add', type: 'success'});
+             }).catch(err => {
+                showNotification({message: err.response.data.msg, type: 'alert'});
+             });
+    }
+
+    const loggedInReservation = async (reservation: ReservationData) => {
+      const Data = {  id, ...reservation }
+      const token = cookie.get('token');
+      await axios.post('/api/reservations/logged-user', Data, 
+            { headers: 
+              { 
+                Authorization: token, 
+                'Content-Type': 'application/json'
+              } 
+            })
+             .then(res => {
+                showNotification({message: 'Reservation is successfully add', type: 'success'});
+             }).catch(err => {
+                showNotification({message: err.response.data.msg, type: 'alert'});
+             });
+    }
+
+    const onReservationHandler = (reservation: ReservationData) => {
+      if(!isLoggedIn){
+        guestReservation(reservation);
+      }else {
+        loggedInReservation(reservation);
+      }
       setIsVisible(false);
+    }
+
+    const onLoginHandler = () => {
+      setIsVisible(false);
+      router.push('/auth');
     }
 
     return (
@@ -34,6 +81,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
             isVisible={isVisible} 
             setIsVisible={setIsVisible}>
               <CustomersData 
+                onLoginHandler={onLoginHandler}
                 reservationDate={reservationDate} 
                 guests={guests} 
                 onReservationHandler={onReservationHandler}

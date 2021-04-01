@@ -22,7 +22,7 @@ const reservationSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    rsrvDate: {
+    reservationDate: {
         type: Date,
         require: true
     },
@@ -33,5 +33,5 @@ const reservationSchema = new mongoose.Schema({
     }
 });
 
-let Reservation = mongoose.models.Restaurant || mongoose.model<ReservationInterface>('Reservation', reservationSchema);
+let Reservation = mongoose.models.Reservation || mongoose.model<ReservationInterface>('Reservation', reservationSchema);
 export default Reservation;
