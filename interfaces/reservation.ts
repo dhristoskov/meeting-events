@@ -6,5 +6,6 @@ export default interface ReservationInterface extends mongoose.Document{
     email: string;
     guests: number;
     reservationDate: Date;
+    confirmed: boolean;
     created: Date;
 }

@@ -11,6 +11,7 @@ import CustomersData from "@/components/reservation-component/CustomersrData";
 import { Notification } from 'context/notification-context/Notification';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import ReservationData from "interfaces/reservationData";
+import GuestEmail from "@/components/reservation-component/GuestEmail";
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -91,6 +92,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
             restaurant={restaurant} 
             onModalHandler={onModalHandler}
         />
+        <GuestEmail guests={guests}/>
       </div>
         
     )

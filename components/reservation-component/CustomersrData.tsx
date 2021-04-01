@@ -80,7 +80,7 @@ const CustomersData: NextPage<Props> = ({ reservationDate, guests, onReservation
                     errors={errors.last_name}
                 />
                 <EmailField onHandleChange={onHandleChange} value={email} errors={errors.email}/>
-                <SubmitButton name={'Reservation'} errors={errors}/>
+                <SubmitButton name={'Reservation'}/>
             </form>
         </div> 
     )

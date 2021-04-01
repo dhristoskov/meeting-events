@@ -6,7 +6,7 @@ import styles from '@/styles/auth.module.scss';
 interface Props {
     value: string;
     onHandleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    errors: Errors;
+    errors?: Errors;
 }
 
 const EmailField: React.FC<Props> = ({ value, onHandleChange, errors}) => {
