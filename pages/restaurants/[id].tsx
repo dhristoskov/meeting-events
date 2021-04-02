@@ -7,11 +7,11 @@ import axios from 'axios';
 import RestaurantInterface from "interfaces/restaurant";
 import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
 import ReservationModal from "@/components/modal-component/ReservationModal";
-import CustomersData from "@/components/reservation-component/CustomersrData";
+import CustomersData from "@/components/reservation-component/CustomersData";
 import { Notification } from 'context/notification-context/Notification';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import ReservationData from "interfaces/reservationData";
-import GuestEmail from "@/components/reservation-component/GuestEmail";
+import { ReservationContext } from "context/reservation-context/ReservationContext";
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -23,14 +23,12 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
     const { id } = router.query;
 
     const { isLoggedIn } = useContext(AuthContext);
+    const { setUserReservation } = useContext(ReservationContext);
     const { showNotification } = useContext(Notification);
     const [ isVisible, setIsVisible ] = useState<boolean>(false);
-    const [ guests, setGuests ] = useState<number>(null);
-    const [ reservationDate, setReservationDate ] = useState<Date>(null);
 
     const onModalHandler = (reservationData: {startDate: Date, guests: number}): void => {
-      setReservationDate(reservationData.startDate);
-      setGuests(reservationData.guests);
+      setUserReservation(reservationData);
       setIsVisible(true);
     };
 
@@ -83,8 +81,6 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
             setIsVisible={setIsVisible}>
               <CustomersData 
                 onLoginHandler={onLoginHandler}
-                reservationDate={reservationDate} 
-                guests={guests} 
                 onReservationHandler={onReservationHandler}
               />
         </ReservationModal>
@@ -92,7 +88,6 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
             restaurant={restaurant} 
             onModalHandler={onModalHandler}
         />
-        <GuestEmail guests={guests}/>
       </div>
         
     )

@@ -57,7 +57,7 @@ const GuestEmail: NextPage<Props> = ({ guests }) => {
                         )           
                     })           
                 }   
-            <SubmitButton name={'Send'}/>   
+                <SubmitButton name={'Send'}/>   
             </form>
         </div> 
     )

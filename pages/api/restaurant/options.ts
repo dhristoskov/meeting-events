@@ -37,7 +37,18 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
     //     return res.status(401).send('No authorization token');
     // }
 
-    const { name, img, email, urlAddress, location, description } = req.body;
+    const { 
+        name, 
+        img, 
+        email, 
+        urlAddress, 
+        location, 
+        area, 
+        kitchen_type, 
+        hasGarten, 
+        priceLevel, 
+        description 
+    } = req.body;
 
     if (!isLength(name, { min: 2 })) {
          return res.status(422).send('Restaurant name must be at least 2 characters long');
@@ -64,7 +75,11 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             img, 
             email, 
             urlAddress, 
-            location, 
+            location,
+            area,
+            kitchen_type,
+            hasGarten, 
+            priceLevel,
             description,
             reservations: []
         });

@@ -6,24 +6,24 @@ import { ValidateInput } from '@/components/utils/formValidator';
 import TextInputField from '../auth-component/TextInputField';
 import ReservationData from 'interfaces/reservationData';
 import { AuthContext } from '../../context/auth-context/AuthContext';
+import { ReservationContext } from 'context/reservation-context/ReservationContext';
 import EmailField from '../auth-component/EmailField';
 
 import styles from '@/styles/reservation.module.scss';
 
 interface Props {
-    reservationDate: Date;
     onLoginHandler: () => void;
-    guests: number;
     onReservationHandler: (reservation: any) => void;
 }
 
-const CustomersData: NextPage<Props> = ({ reservationDate, guests, onReservationHandler, onLoginHandler }) => {
+const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler }) => {
 
+    const { userReservation } = useContext(ReservationContext);
     const { isLoggedIn } = useContext(AuthContext);
     const [ errors, setErrors ] = useState<any>([]);
     const [ reservation, setReservation ] = useState<ReservationData>({
-        reservationDate: reservationDate,
-        guests: guests,
+        reservationDate: userReservation.startDate,
+        guests: userReservation.guests,
         first_name: '',
         last_name: '',
         email: ''
@@ -54,9 +54,9 @@ const CustomersData: NextPage<Props> = ({ reservationDate, guests, onReservation
     return (
         <div className={styles.container}>
             <div className={styles.rsrvData}>
-                <p>Date: { reservationDate.toLocaleDateString('de-DE',  { weekday: 'long', day:'numeric', month: 'long', year: 'numeric' }) }</p>
-                <p>Time: { reservationDate.toLocaleTimeString('de-DE', {hour: '2-digit', minute:'2-digit'}) }</p>
-                <p>Guests: { guests }</p>
+                <p>Date: { userReservation.startDate.toLocaleDateString('de-DE',  { weekday: 'long', day:'numeric', month: 'long', year: 'numeric' }) }</p>
+                <p>Time: { userReservation.startDate.toLocaleTimeString('de-DE', {hour: '2-digit', minute:'2-digit'}) }</p>
+                <p>Guests: { userReservation.guests }</p>
             </div>
             {
                 isLoggedIn

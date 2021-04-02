@@ -27,6 +27,23 @@ const restaurantSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
+    area: {
+        type: String, 
+        required: true
+    },
+    //To add more
+    kitchen_type: {
+        type: [ { type: String, enum: ['vegan', 'fast-food', 'vegetarian', 'bbq', 'fusion'] } ],
+        required: true
+    },
+    hasGarten: {
+        type: Boolean,
+        require: true
+    },
+    priceLevel: {
+        type: [ { type: String, enum: ['low', 'medium', 'high', 'very high'] }],
+        required: true
+    },
     description: {
         type: String,
         required: true,
