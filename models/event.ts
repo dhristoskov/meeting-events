@@ -1,5 +1,6 @@
-import EventInterface from 'interfaces/event';
 import * as mongoose from 'mongoose';
+
+import EventInterface from 'interfaces/event';
 
 const eventSchema = new mongoose.Schema({
     name: { 

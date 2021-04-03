@@ -41,7 +41,8 @@ const restaurantSchema = new mongoose.Schema({
         require: true
     },
     priceLevel: {
-        type: [ { type: String, enum: ['low', 'medium', 'high', 'very high'] }],
+        type: String,
+        enum: ['low', 'medium', 'high', 'very high'],
         required: true
     },
     description: {

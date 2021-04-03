@@ -1,10 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import isLength from 'validator/lib/isLength';
+import mongoose from 'mongoose';
 // import jwt from 'jsonwebtoken';
 
 import connectDB from '../../../middleware/mongoose';
 import RestaurantInterface from "interfaces/restaurant";
 import Restaurant from "models/restaurant";
+import City from 'models/city';
+import CityInterface from 'interfaces/city';
 // import UserInterface from 'interfaces/user';
 // import User from 'models/user';
 
@@ -54,6 +57,22 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
          return res.status(422).send('Restaurant name must be at least 2 characters long');
     }
 
+    let city: CityInterface | null = null
+    try {
+        city = await City.findOne({ city: area }).exec();
+    }catch(err){
+        res.status(500).send('Server error at city search')
+    }
+
+    if(!city){
+        city = new City({
+            city: area,
+            restaurants: []
+        })
+
+        await city.save();
+    }
+
     // let user: UserInterface | null = null;
     // try {
     //     const { userId } = jwt.verify(
@@ -83,8 +102,14 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             description,
             reservations: []
         });
-    
-        await restaurant.save();
+
+        const session = await mongoose.startSession();
+        session.startTransaction();
+        await restaurant.save({session: session});
+        city.restaurants.push(restaurant);
+        await city.save({session: session});
+        await session.commitTransaction();
+        // await restaurant.save();
         res.status(201).json({ restaurant });
     }catch(err) {
         res.status(500).send({msg: 'Creating a new restaurant failed, please try again'});

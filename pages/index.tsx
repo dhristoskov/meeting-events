@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps<Props>  = async () => {
   if ( !response  ) {
       return {
         redirect: {
-          destination: '/',
+          destination: '/info',
           permanent: false,
         },
       }
