@@ -1,29 +1,45 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useContext, useState } from 'react';
+import { useRouter } from "next/router";
+import { ReservationContext } from 'context/reservation-context/ReservationContext';
 
-const CityPicker = () => {
+import styles from '@/styles/header.module.scss';
 
-    const [ cities, setCities ] = useState<{city: string}[]>([]) 
+const CityPicker= () => {
 
-    useEffect(() => {
-        const url = 'http://localhost:3000/api/restaurant/get-citynames';
-        axios.get(url)
-             .then( res => {
-                setCities(res.data.cities)
-            }).catch(err => {
-                console.log(err)
-            });
-    }, [])
+    const { cities } = useContext(ReservationContext);
+    const [ isListOpen, setListState ] = useState<boolean>(false);
+    const [ selected, setSelected ] = useState<string>('')
+    const router = useRouter();
+
+    const toggleSelect = (): void => {
+        setListState(prevState => !prevState);
+    };
+
+    const selectedItem = (name: string): void => {
+        router.push(`/restaurants/by-cityname/${name}`)
+        setSelected(name);
+        setListState(false);
+    };
 
     return(
-        <div>
-            {
-                cities.map(item => {
-                    return (
-                        <p key={item.city}>{ item.city }</p>
-                    )
-                })
-            }
+        <div className={styles.dropdown}>
+            <div onClick={toggleSelect}>{ selected ? selected : 'Select location'}</div>
+            <div className={styles.selectors}>
+                {
+                   isListOpen && cities.map(item => {
+                       if(item.city !== selected){
+                        return (
+                            <p className={styles.select} 
+                            key={item.city}
+                            onClick={() => selectedItem(item.city)}
+                            >
+                                { item.city }
+                            </p>
+                        )
+                       }            
+                    })
+                }
+            </div>
         </div>
     )
 }

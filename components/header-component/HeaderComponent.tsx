@@ -4,9 +4,9 @@ import 'nprogress/nprogress.css';
 
 import SettingsComponent from './SettingsComponent';
 import LogoBtnComponent from './LogoBtnComponent';
+import CityPicker from './CityPicker';
 
 import styles from '@/styles/header.module.scss';
-import CityPicker from './CityPicker';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', () => NProgress.start());

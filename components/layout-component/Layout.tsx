@@ -1,5 +1,7 @@
-import { Fragment, ReactNode, useContext } from 'react';
+import { Fragment, ReactNode, useContext, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import axios from 'axios';
+import { NextPage } from 'next';
 
 import HeaderComponent from '@/components/header-component/HeaderComponent';
 import FooterComponent from '../footer-component/FooterComponent';
@@ -7,6 +9,7 @@ import AuthContextProvider from 'context/auth-context/AuthContext';
 import NotificationComponent from '@/components/notification-component/NotificationComponent';
 import { ThemeContext } from 'context/theme-context/ThemeContext';
 import { Notification } from 'context/notification-context/Notification';
+import { ReservationContext } from 'context/reservation-context/ReservationContext';
 
 import styles from '@/styles/layout.module.scss';
 
@@ -14,10 +17,22 @@ interface Props {
     children: ReactNode
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: NextPage<Props> = ({ children }) => {
 
     const { isLight, DarkTheme, LightTheme } = useContext(ThemeContext);
-    const { activeNotification } = useContext(Notification)
+    const { setCities } = useContext(ReservationContext);
+    const { activeNotification } = useContext(Notification);
+
+    useEffect(() => {
+        const url = 'http://localhost:3000/api/restaurant/get-citynames';
+        axios.get(url)
+             .then( res => {
+                setCities(res.data.cities)
+            }).catch(err => {
+                console.log(err)
+            });
+    }, [])
+
 
     return (
         <Fragment>
@@ -44,4 +59,4 @@ const Layout: React.FC<Props> = ({ children }) => {
     )
 }
 
-export default Layout
+export default Layout;

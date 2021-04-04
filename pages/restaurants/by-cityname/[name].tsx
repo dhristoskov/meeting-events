@@ -11,7 +11,7 @@ interface Props {
   restaurants: RestaurantInterface[];
 }
 
-const Home: NextPage<Props> = ({ restaurants }) =>  {
+const RestaurantsByCity: NextPage<Props> = ({ restaurants }) =>  {
 
   const router = useRouter();
 
@@ -32,24 +32,25 @@ const Home: NextPage<Props> = ({ restaurants }) =>  {
   )
 }
 
-export default Home;
+export default RestaurantsByCity;
 
-export const getServerSideProps: GetServerSideProps<Props>  = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ query: { name } }) => {
 
-  const url = `http://localhost:3000/api/restaurant/options`;
+  const url = `http://localhost:3000/api/restaurant/get-by-city`;
+  const payload = { params: { name } };
 
-  const response = await axios.get(url);
+  const response = await axios.get(url, payload);
 
   if ( !response  ) {
       return {
         redirect: {
-          destination: '/info',
+          destination: '/',
           permanent: false,
         },
       }
   }
 
   return {
-     props: {  restaurants: response.data.restaurants }
+     props: { restaurants: response.data.restaurants  }
   };
 }

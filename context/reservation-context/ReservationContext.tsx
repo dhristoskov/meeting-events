@@ -9,19 +9,16 @@ interface RsrvData {
     guests: number;
 };
 
-interface CustomerData {
-    reservationDate: Date;
-    guests: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-};
+interface Cities {
+    city: string
+}
+
 
 interface Reservation {
+    cities: Cities[]
     userReservation: RsrvData;
-    customer: CustomerData;
     setUserReservation: (reservation: RsrvData) => void;
-    setCustomer: (customer: CustomerData) => void;
+    setCities: (cities: Cities[]) => void;
 }
 
 export const ReservationContext = createContext<Reservation>({} as Reservation);
@@ -30,21 +27,16 @@ export const ReservationContext = createContext<Reservation>({} as Reservation);
 const ReservationContextProvider: React.FC<Props> = ({ children }) => {
 
     const [ userReservation, setUserReservation ] = useState<RsrvData>({ startDate: null, guests: null });
-    const [ customer, setCustomer ] = useState<CustomerData>({ 
-        reservationDate: null, 
-        guests: null, 
-        first_name: '', 
-        last_name: '', 
-        email: '' 
-    });
+    const [ cities, setCities ] = useState<Cities[]>([]);
+    // const [ selectedCity, setSelectedCity ] = useState<string>()
 
     return (
         <ReservationContext.Provider 
             value={{ 
+                cities,
                 userReservation,
-                customer,
                 setUserReservation,
-                setCustomer
+                setCities
             }}>
             { children }
         </ReservationContext.Provider>

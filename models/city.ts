@@ -10,7 +10,7 @@ const citySchema = new mongoose.Schema({
     restaurants: [{
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 
-        ref: 'Restaurants'
+        ref: 'Restaurant'
     }],
     created: {
         type: Date,
