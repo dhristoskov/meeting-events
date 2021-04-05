@@ -5,10 +5,11 @@ import { NextPage } from 'next';
 import RestaurantInterface from 'interfaces/restaurant';
 import ReservationForm from '@/components/reservation-component/ReservationForm';
 import { AuthContext } from 'context/auth-context/AuthContext';
-import CostumerStats from './CostumerStats';
 import ButtonOptions from './ButtonOptions';
 
 import styles from '@/styles/restaurant.module.scss';
+import InfoBar from './AdditionalInfo/InfoBar';
+import FoodType from './AdditionalInfo/FoodType';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -32,8 +33,11 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
         <div className={styles.main}>
             <div className={styles.upper}>
                 <div className={styles.info}>
-                    <h3 className={styles.uppername}>{ restaurant.name }</h3>
-                    <CostumerStats />
+                    <div className={styles.firstline}>
+                        <h3 className={styles.uppername}>{ restaurant.name }</h3>
+                        <FoodType kitchen_type={restaurant.kitchen_type} />
+                    </div>   
+                    <InfoBar priceLevel={restaurant.priceLevel} hasGarten={restaurant.hasGarten}/>
                     <p className={styles.description}>{ restaurant.description }</p>
                     <ButtonOptions addToFavorites={addToFavorites}/>     
                 </div>

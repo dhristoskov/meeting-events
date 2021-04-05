@@ -16,6 +16,36 @@
         .info {
             width: 40%;
 
+            .firstline {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;  
+
+                .uppername {
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                }
+
+                .kitchen {
+                    display: flex;
+
+                    .type {
+                        margin-right: 10px;
+                        padding: 2px 5px;
+                        border: 1px solid $icon-light;
+                        color: $icon-light;
+                    }
+                }
+            }
+
+            .addinfo {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+            }
+
             .states{
                 margin-top: 15px;
                 display: flex;
@@ -45,10 +75,6 @@
                     color: $base-color-dark;
                     cursor: pointer;
                 }
-            }
-
-            .uppername {
-                font-size: 30px;
             }
 
             .description{
@@ -127,6 +153,7 @@
 
     //Card
     .card {
+        margin: 5px;
         cursor: pointer;
         width: 20%;
 
