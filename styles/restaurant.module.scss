@@ -123,6 +123,7 @@
     width: 85%;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 
     //Card
     .card {
@@ -142,6 +143,28 @@
      
         .name {
             font-size: 18px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width: 700px) { 
+    .wrapper {
+        width: 90%;
+
+        .card {
+            width: 40%;
+            margin: 5px;
+        }
+    }
+}
+
+@media (max-width: 400px) { 
+    .wrapper {
+        width: 90%;
+
+        .card {
+            width: 100%;
             margin-bottom: 10px;
         }
     }

@@ -16,8 +16,10 @@ interface Cities {
 
 interface Reservation {
     cities: Cities[]
+    selectedCity: string;
     userReservation: RsrvData;
     setUserReservation: (reservation: RsrvData) => void;
+    setSelectedCity: (city: string) => void;
     setCities: (cities: Cities[]) => void;
 }
 
@@ -28,13 +30,15 @@ const ReservationContextProvider: React.FC<Props> = ({ children }) => {
 
     const [ userReservation, setUserReservation ] = useState<RsrvData>({ startDate: null, guests: null });
     const [ cities, setCities ] = useState<Cities[]>([]);
-    // const [ selectedCity, setSelectedCity ] = useState<string>()
+    const [ selectedCity, setSelectedCity ] = useState<string>('')
 
     return (
         <ReservationContext.Provider 
             value={{ 
                 cities,
                 userReservation,
+                selectedCity,
+                setSelectedCity,
                 setUserReservation,
                 setCities
             }}>
