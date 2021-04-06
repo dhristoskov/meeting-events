@@ -8,6 +8,12 @@
     flex-direction: column;
     justify-content: space-between;
 
+    .back{
+        margin-bottom: 15px;
+        color: $icon-light;
+        cursor: pointer;
+    }
+
     .upper, .middle {
         display: flex;
         justify-content: space-between;
@@ -64,15 +70,16 @@
                 width: 100%;
 
                 .btn {
+                    font-size: 16px;
                     text-align: center;
-                    width: 20%;
                     font-weight: 600;
-                    width: 100px;
-                    padding: 5px 10px;
+                    padding: 5px 15px;
                     outline: none;
-                    background-color: $icon-light;
-                    border: 1px solid $icon-light;
-                    color: $base-color-dark;
+                    border: none;
+                    border-radius: 20px;
+                    color: $color-white;
+                    letter-spacing: .5px;
+                    background-color: $icon-dark;
                     cursor: pointer;
                 }
             }
@@ -145,7 +152,7 @@
 
 //Cards wrapper
 .wrapper {
-    margin: 50px auto 0 auto;
+    margin: 50px auto 0px auto;
     width: 85%;
     display: flex;
     justify-content: space-evenly;

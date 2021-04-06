@@ -31,6 +31,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
 
     return (
         <div className={styles.main}>
+            <p className={styles.back} onClick={() => router.back()}>Go back</p>
             <div className={styles.upper}>
                 <div className={styles.info}>
                     <div className={styles.firstline}>

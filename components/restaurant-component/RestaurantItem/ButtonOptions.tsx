@@ -11,7 +11,7 @@ const ButtonOptions: NextPage<Props> = ({ addToFavorites }) => {
     return (
         <div className={styles.buttons}>
             <p className={styles.btn}>Reviews</p>
-            <button className={styles.btn} onClick={addToFavorites}>Favorites</button>
+            <p className={styles.btn} onClick={addToFavorites}>Favorites</p>
         </div> 
     )
 }

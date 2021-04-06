@@ -27,7 +27,7 @@ const SettingsComponent = () => {
                 isLoggedIn 
                 ? 
                 <div className={styles.loggedIn}>
-                    <p className={styles.auth} onClick={logout}><IoLogOutOutline /></p>
+                    <p className={styles.auth} onClick={logout}>Logout</p>
                     <IconCompnent>
                         <Link href={`/`}>
                             <a className={styles.profile}><IoMailOutline /></a>
@@ -39,7 +39,7 @@ const SettingsComponent = () => {
                         </Link>
                     </IconCompnent>           
                 </div> 
-                : <Link href='/auth'><a className={styles.auth}><IoLogInOutline /></a></Link> 
+                : <Link href='/auth'><a className={styles.auth}>Log-In</a></Link> 
             }       
             <motion.p 
             className={styles.icon} 

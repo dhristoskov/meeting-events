@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import { useRouter } from "next/router";
 import { ReservationContext } from 'context/reservation-context/ReservationContext';
 
@@ -9,6 +10,18 @@ const CityPicker= () => {
     const { cities, setSelectedCity, selectedCity } = useContext(ReservationContext);
     const [ isListOpen, setListState ] = useState<boolean>(false);
     const router = useRouter();
+
+
+    //To integrate it!!!!
+    useEffect(() => {
+        axios.get('https://ipapi.co/json')
+            .then(response => {
+                console.log(response.data.city);
+            })
+            .catch(err => {
+                console.log('Request failed');
+            })
+    }, [])
 
     const toggleSelect = (): void => {
         setListState(prevState => !prevState);

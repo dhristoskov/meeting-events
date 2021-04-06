@@ -17,7 +17,7 @@ const LogoBtnComponent = () => {
     }
 
     return (
-           <Image onClick={onToHomeHandler} src='/icons/logo.svg' alt='logo' width={35} height={35} className={styles.logo}/>           
+           <Image onClick={onToHomeHandler} src='/icons/logo.svg' alt='logo' width={45} height={45} className={styles.logo}/>           
     )
 }
 

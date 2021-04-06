@@ -75,7 +75,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
     }
 
     return (
-      <div>
+      <div>    
         <ReservationModal 
             isVisible={isVisible} 
             setIsVisible={setIsVisible}>
