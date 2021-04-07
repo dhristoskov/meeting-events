@@ -5,19 +5,21 @@ import axios from 'axios';
 import UserInterface from 'interfaces/user';
 import UserInfoBar from '@/components/user-dashboard-component/UserDashboardInfo/UserInfoBar';
 import UserReservation from '@/components/user-dashboard-component/UserReservations/UserReservation';
+import ReservationInterface from 'interfaces/reservation';
 
 import styles from '@/styles/layout.module.scss';
 
 interface Props {
     user: UserInterface;
+    reservations: ReservationInterface[]
 }
 
-const UserProfilePage: NextPage<Props> = ({ user }) => {
+const UserProfilePage: NextPage<Props> = ({ user, reservations }) => {
 
     return(
         <div className={styles.reservations}>
             <UserInfoBar user={user} />
-            <UserReservation />
+            <UserReservation reservations={reservations} />
         </div>
        
     )
@@ -25,14 +27,29 @@ const UserProfilePage: NextPage<Props> = ({ user }) => {
 
 export default UserProfilePage;
 
-export const getServerSideProps: GetServerSideProps<Props>  = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
 
     const { token } = parseCookies(ctx);
-    const url = `http://localhost:3000/api/user-profile/profile`;
+    const urlProfile = `http://localhost:3000/api/user-profile/profile`;
+    const urlReservations = `http://localhost:3000/api/reservations/user`;
 
-    const response = await axios.get(url, { headers: { Authorization: token } });
+    const responseProfile = axios.get(urlProfile, { headers: { Authorization: token } });
+    const responseReservations = axios.get(urlReservations, { headers: { Authorization: token } });
+
+    let profile: UserInterface = null;
+    let reservations: ReservationInterface[] = [];
+
+    await axios.all([
+        responseProfile,
+        responseReservations
+      ])
+      .then(axios.spread((...responses) => {
+        profile = responses[0].data.user;
+        reservations = responses[1].data.reservations;
+      }));
     
-    if ( !response || !token ) {
+
+    if ( !token ) {
         return {
           redirect: {
             destination: '/',
@@ -42,6 +59,6 @@ export const getServerSideProps: GetServerSideProps<Props>  = async (ctx) => {
     }
 
     return {
-       props: {  user: response.data.user }
+       props: { user: profile, reservations }
     };
 }

@@ -46,7 +46,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
     const loggedInReservation = async (reservation: ReservationData) => {
       const Data = {  id, ...reservation }
       const token = cookie.get('token');
-      await axios.post('/api/reservations/logged-user', Data, 
+      await axios.post('/api/reservations/user', Data, 
             { headers: 
               { 
                 Authorization: token, 
