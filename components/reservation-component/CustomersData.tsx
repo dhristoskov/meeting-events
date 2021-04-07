@@ -25,6 +25,8 @@ const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler, 
     const { isLoggedIn } = useContext(AuthContext);
     const [ errors, setErrors ] = useState<any>([]);
     const [ reservation, setReservation ] = useState<ReservationData>({
+        restaurantAddress: restaurant.location,
+        restaurantCity: restaurant.area,
         restaurantName: restaurant.name,
         reservationDate: userReservation.startDate,
         guests: userReservation.guests,
@@ -46,6 +48,8 @@ const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler, 
         e.preventDefault(); 
         onReservationHandler(reservation);
         setReservation({
+            restaurantAddress: null,
+            restaurantCity: null,
             restaurantName: null,
             reservationDate: null,
             guests: null,

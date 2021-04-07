@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import UserInterface from 'interfaces/user';
 import UserInfoBar from '@/components/user-dashboard-component/UserDashboardInfo/UserInfoBar';
-import UserReservation from '@/components/user-dashboard-component/UserReservation/UserReservation';
+import UserReservation from '@/components/user-dashboard-component/UserReservations/UserReservation';
 
 import styles from '@/styles/layout.module.scss';
 

@@ -26,6 +26,14 @@ const reservationSchema = new mongoose.Schema({
         type: String, 
         required: true,
     },
+    restaurantAddress: {
+        type: String, 
+        required: true,
+    },
+    restaurantCity: {
+        type: String, 
+        required: true,
+    },
     reservationDate: {
         type: Date,
         require: true
