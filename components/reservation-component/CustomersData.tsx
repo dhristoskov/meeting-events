@@ -5,23 +5,27 @@ import SubmitButton from '@/components/auth-component/SubmitButton';
 import { ValidateInput } from '@/components/utils/formValidator';
 import TextInputField from '../auth-component/TextInputField';
 import ReservationData from 'interfaces/reservationData';
+import RestaurantInterface from 'interfaces/restaurant';
+import EmailField from '../auth-component/EmailField';
+
 import { AuthContext } from '../../context/auth-context/AuthContext';
 import { ReservationContext } from 'context/reservation-context/ReservationContext';
-import EmailField from '../auth-component/EmailField';
 
 import styles from '@/styles/reservation.module.scss';
 
 interface Props {
     onLoginHandler: () => void;
     onReservationHandler: (reservation: any) => void;
+    restaurant: RestaurantInterface;
 }
 
-const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler }) => {
+const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler, restaurant }) => {
 
     const { userReservation } = useContext(ReservationContext);
     const { isLoggedIn } = useContext(AuthContext);
     const [ errors, setErrors ] = useState<any>([]);
     const [ reservation, setReservation ] = useState<ReservationData>({
+        restaurantName: restaurant.name,
         reservationDate: userReservation.startDate,
         guests: userReservation.guests,
         first_name: '',
@@ -42,6 +46,7 @@ const CustomersData: NextPage<Props> = ({ onReservationHandler, onLoginHandler }
         e.preventDefault(); 
         onReservationHandler(reservation);
         setReservation({
+            restaurantName: null,
             reservationDate: null,
             guests: null,
             first_name: '',

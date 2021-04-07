@@ -24,7 +24,7 @@ const addReservation = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(401).send('No authorization token');
         }
 
-        const {  id, first_name, last_name, email, guests, reservationDate } = req.body;
+        const {  id, first_name, last_name, email, guests, reservationDate, restaurantName } = req.body;
 
         if (!isLength(first_name, { min: 2 })) {
             return res.status(422).send('First name must be at least 2 characters long');
@@ -66,7 +66,8 @@ const addReservation = async (req: NextApiRequest, res: NextApiResponse) => {
                 last_name, 
                 email, 
                 guests, 
-                reservationDate
+                reservationDate,
+                restaurantName
             });
 
             const session = await mongoose.startSession();

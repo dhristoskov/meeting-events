@@ -1,4 +1,5 @@
 export default interface ReservationData {
+    restaurantName: string;
     reservationDate: Date;
     guests: number;
     first_name: string;

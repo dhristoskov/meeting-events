@@ -1,11 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { parseCookies } from 'nookies';
-import Link from 'next/link';
 import axios from 'axios';
 
 import UserInterface from 'interfaces/user';
+import UserInfoBar from '@/components/user-dashboard-component/UserDashboardInfo/UserInfoBar';
+import UserReservation from '@/components/user-dashboard-component/UserReservation/UserReservation';
 
-import styles from '@/styles/dashboard.module.scss';
+import styles from '@/styles/layout.module.scss';
 
 interface Props {
     user: UserInterface;
@@ -13,20 +14,12 @@ interface Props {
 
 const UserProfilePage: NextPage<Props> = ({ user }) => {
 
-    const date = new Date(user.created).toLocaleDateString('en-GB')
-
     return(
-        <div className={styles.submenu}>
-            <div className={styles.profile}>
-                <p>Username: <span>{user.username}</span></p>
-                <p>Email: <span>{user.email}</span></p>
-                <p>{date}</p>
-            </div>
-            <div className={styles.settings}>
-                <Link href='/user-dashboard/settings'>
-                    <a className={styles.item}>Settings</a></Link>
-            </div>      
+        <div className={styles.reservations}>
+            <UserInfoBar user={user} />
+            <UserReservation />
         </div>
+       
     )
 }
 

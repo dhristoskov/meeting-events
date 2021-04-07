@@ -3,11 +3,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
     IoBulbOutline, 
-    IoLogInOutline, 
     IoBulbSharp, 
-    IoLogOutOutline, 
     IoPersonOutline,
-    IoMailOutline
 } from 'react-icons/io5';
 
 import { ThemeContext } from 'context/theme-context/ThemeContext';
@@ -28,11 +25,6 @@ const SettingsComponent = () => {
                 ? 
                 <div className={styles.loggedIn}>
                     <p className={styles.auth} onClick={logout}>Logout</p>
-                    <IconCompnent>
-                        <Link href={`/`}>
-                            <a className={styles.profile}><IoMailOutline /></a>
-                        </Link>
-                    </IconCompnent>
                     <IconCompnent>
                         <Link href={`/user-dashboard`}>
                             <a className={styles.profile}><IoPersonOutline /></a>

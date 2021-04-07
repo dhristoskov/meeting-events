@@ -80,6 +80,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
             isVisible={isVisible} 
             setIsVisible={setIsVisible}>
               <CustomersData 
+                restaurant={restaurant} 
                 onLoginHandler={onLoginHandler}
                 onReservationHandler={onReservationHandler}
               />
