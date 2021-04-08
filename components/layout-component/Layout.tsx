@@ -12,6 +12,7 @@ import { Notification } from 'context/notification-context/Notification';
 import { ReservationContext } from 'context/reservation-context/ReservationContext';
 
 import styles from '@/styles/layout.module.scss';
+import CustomersData from '../reservation-component/CustomersData';
 
 interface Props {
     children: ReactNode
@@ -42,6 +43,7 @@ const Layout: NextPage<Props> = ({ children }) => {
                     { children }
                     <FooterComponent />
                 </div>
+                 {/* <div className={styles.sidebar}></div> */}
                 <AnimatePresence>
                 {
                     activeNotification && 

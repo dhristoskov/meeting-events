@@ -1,6 +1,16 @@
 .layout {
+    position: relative;
     width: 100%;
     min-height: 100vh;
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 30%;
+        height: 600px;
+        background-color: white;
+    }
 }
 
 .reservations {
