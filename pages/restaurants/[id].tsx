@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import RestaurantInterface from "interfaces/restaurant";
 import RestaurantItem from "@/components/restaurant-component/RestaurantItem/RestaurantItem";
-import ReservationModal from "@/components/modal-component/ReservationModal";
+import Modal from "@/components/modal-component/Modal";
 import CustomersData from "@/components/reservation-component/CustomersData";
 import { Notification } from 'context/notification-context/Notification';
 import { AuthContext } from 'context/auth-context/AuthContext';
@@ -76,7 +76,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
 
     return (
       <div>    
-        <ReservationModal 
+        <Modal 
             isVisible={isVisible} 
             setIsVisible={setIsVisible}>
               <CustomersData 
@@ -84,7 +84,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
                 onLoginHandler={onLoginHandler}
                 onReservationHandler={onReservationHandler}
               />
-        </ReservationModal>
+        </Modal>
         <RestaurantItem 
             restaurant={restaurant} 
             onModalHandler={onModalHandler}

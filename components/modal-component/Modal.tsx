@@ -12,7 +12,7 @@ interface Props {
     setIsVisible: (state: boolean) => void;
 };
 
-const ReservationModal: NextPage<Props> = ({ isVisible, children, setIsVisible }) => {
+const Modal: NextPage<Props> = ({ isVisible, children, setIsVisible }) => {
 
     return(
         <Fragment>
@@ -35,4 +35,4 @@ const ReservationModal: NextPage<Props> = ({ isVisible, children, setIsVisible }
     )
 }
 
-export default ReservationModal
+export default Modal

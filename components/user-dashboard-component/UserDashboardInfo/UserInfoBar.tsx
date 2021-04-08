@@ -7,15 +7,16 @@ import UserInterface from 'interfaces/user';
 import styles from '@/styles/dashboard.module.scss';
 
 interface Props {
-    user: UserInterface
+    user: UserInterface;
+    refreshData: () => void;
 }
 
-const UserInfoBar: NextPage<Props> = ({ user }) => {
+const UserInfoBar: NextPage<Props> = ({ user, refreshData }) => {
 
     return (
         <div className={styles.submenu}>
             <UserInfo user={user}/>
-            <UserSettings />
+            <UserSettings refreshData={refreshData}/>
         </div>
     )
 

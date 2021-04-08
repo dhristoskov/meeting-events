@@ -1,5 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
+import { useCallback } from 'react';
 import axios from 'axios';
 
 import UserInterface from 'interfaces/user';
@@ -16,9 +18,15 @@ interface Props {
 
 const UserProfilePage: NextPage<Props> = ({ user, reservations }) => {
 
+  const router = useRouter();
+
+  const refreshData = useCallback(() => {
+    router.replace(router.asPath)
+  }, []);
+
     return(
         <div className={styles.reservations}>
-            <UserInfoBar user={user} />
+            <UserInfoBar user={user} refreshData={refreshData}/>
             <UserReservation reservations={reservations} />
         </div>
        
@@ -47,7 +55,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
         profile = responses[0].data.user;
         reservations = responses[1].data.reservations;
       }));
-    
 
     if ( !token ) {
         return {
