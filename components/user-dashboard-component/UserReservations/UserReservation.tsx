@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 
 import ReservationHeader from './ReservationHeader/RservationHeader';
@@ -13,11 +14,16 @@ interface Props {
 
 const UserReservation: NextPage<Props> = ({ reservations }) => {
 
+    const [ currentReservations, steCurrentReservations ]  = useState<ReservationInterface[]>(reservations)
+
     return (
         <div className={styles.rsrvdata}>
-           <ReservationHeader />
+           <ReservationHeader 
+           reservations={reservations} 
+           steCurrentReservations={steCurrentReservations}
+           />
            {
-              reservations.length > 0 ? reservations.map( item => {
+              currentReservations.length > 0 ? currentReservations.map( item => {
                 return (
                     <motion.div 
                     key={item._id} 
@@ -37,7 +43,7 @@ const UserReservation: NextPage<Props> = ({ reservations }) => {
                         <IoEllipsisHorizontalOutline className={styles.icon} />
                     </motion.div>
                   )
-              }) : <p className={styles.empty}>Your reservation list is empty</p>
+              }) : <p className={styles.empty}>The list is empty</p>
            }
         </div>
     )
