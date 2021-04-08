@@ -56,6 +56,11 @@ const restaurantSchema = new mongoose.Schema({
         required: true, 
         ref: 'Reservation'
     }],
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: false, 
+        ref: 'Review'
+    }],
     created: {
         type: Date,
         required: true,

@@ -50,7 +50,7 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
         kitchen_type, 
         hasGarten, 
         priceLevel, 
-        description 
+        description
     } = req.body;
 
     if (!isLength(name, { min: 2 })) {
@@ -100,7 +100,8 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             hasGarten, 
             priceLevel,
             description,
-            reservations: []
+            reservations: [],
+            reviews: []
         });
 
         const session = await mongoose.startSession();
@@ -109,7 +110,6 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
         city.restaurants.push(restaurant);
         await city.save({session: session});
         await session.commitTransaction();
-        // await restaurant.save();
         res.status(201).json({ restaurant });
     }catch(err) {
         res.status(500).send({msg: 'Creating a new restaurant failed, please try again'});

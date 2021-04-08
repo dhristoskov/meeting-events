@@ -22,6 +22,10 @@ const reservationSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    restaurantId: {
+        type: String, 
+        required: true,
+    },
     restaurantName: {
         type: String, 
         required: true,
