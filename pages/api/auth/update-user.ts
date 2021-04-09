@@ -18,11 +18,12 @@ const updateUser = async  (req: NextApiRequest, res: NextApiResponse)  => {
             return res.status(401).send('No authorization token');
         }
 
-        const { email } = req.body;
+        const { email, avatar } = req.body;
 
-        if (!isEmail(email)) {
-            return res.status(422).send('Email must be valid address');
-        }
+        // TO MAKE A CHECK !!!!!
+        // if (!isEmail(email)) {
+        //     return res.status(422).send('Email must be valid address');
+        // }
 
         let user: UserInterface | null = null;
         try{
@@ -42,6 +43,7 @@ const updateUser = async  (req: NextApiRequest, res: NextApiResponse)  => {
     
         try {
             user.email = email || user.email;
+            user.avatar = avatar || user.avatar;
             await user.save();
             res.status(200).json(user);
         }catch(err){

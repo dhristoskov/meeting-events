@@ -24,8 +24,8 @@ const Register: NextPage = () => {
     const { login } = useContext(AuthContext);
     const [ isLogin, setIsLogin ] = useState<boolean>(true);
 
-    const onRegisterHandler = (user: RegistrationUser) => {
-        axios.post<UserResponse>('/api/auth/user-register', user, 
+    const onRegisterHandler = async (user: RegistrationUser) => {
+       await axios.post<UserResponse>('/api/auth/user-register', user, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 showNotification({message: 'Registered successfully', type: 'success'});
@@ -35,8 +35,8 @@ const Register: NextPage = () => {
              });
     };
 
-    const onLoginHandler = (loginUser: LoginUser) => {
-        axios.post<UserResponse>('/api/auth/user-login', loginUser, 
+    const onLoginHandler = async (loginUser: LoginUser) => {
+        await axios.post<UserResponse>('/api/auth/user-login', loginUser, 
         { headers: {'Content-Type': 'application/json'}})
              .then(res => {
                 showNotification({message: 'Login successfully', type: 'success'});

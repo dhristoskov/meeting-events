@@ -15,7 +15,7 @@ const UserInfoBar: NextPage<Props> = ({ user, refreshData }) => {
 
     return (
         <div className={styles.submenu}>
-            <UserInfo user={user}/>
+            <UserInfo user={user} refreshData={refreshData}/>
             <UserSettings refreshData={refreshData}/>
         </div>
     )

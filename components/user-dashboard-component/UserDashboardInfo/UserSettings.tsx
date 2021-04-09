@@ -31,9 +31,9 @@ const UserSettings: NextPage<Props> = ({ refreshData }) => {
     }
     
 
-    const changeEmailHandler = (emailData: { email: string }) => { 
+    const changeEmailHandler = async (emailData: { email: string }) => { 
         const token = cookie.get('token');
-        axios.put<{msg: string}>('/api/auth/update-user', emailData, 
+        await axios.put<{msg: string}>('/api/auth/update-user', emailData, 
             { headers: 
                 { 
                     Authorization: token, 
@@ -50,9 +50,9 @@ const UserSettings: NextPage<Props> = ({ refreshData }) => {
              });
     };
 
-    const changePasswordHandler = (userData: {password2: string, password: string }) => {
+    const changePasswordHandler = async (userData: {password2: string, password: string }) => {
         const token = cookie.get('token');
-        axios.put<{msg: string}>('/api/auth/change-password', userData, 
+        await axios.put<{msg: string}>('/api/auth/change-password', userData, 
             { headers: 
                 { 
                     Authorization: token, 
@@ -69,9 +69,9 @@ const UserSettings: NextPage<Props> = ({ refreshData }) => {
              });
     };
 
-    const userDeleteHandler = (data: { password: string }) => { 
+    const userDeleteHandler = async (data: { password: string }) => { 
         const token = cookie.get('token');
-        axios.delete('/api/auth/delete-user', { data, 
+        await axios.delete('/api/auth/delete-user', { data, 
              headers:  {  Authorization: token } })
              .then(res => {
                 showNotification({message: 'User deleted', type: 'succses'});
