@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { NextPage } from 'next';
-import Image from 'next/image';
-import { IoMailOutline, IoTimerOutline } from 'react-icons/io5';
 import axios from 'axios';
 import cookie from 'js-cookie';
+import Image from 'next/image';
+import { IoMailOutline, IoTimerOutline } from 'react-icons/io5';
 
 import UserInterface from 'interfaces/user';
 import UserAvatar from '@/components/auth-component/UserAvatar';

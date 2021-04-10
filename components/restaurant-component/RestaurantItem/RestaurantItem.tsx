@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 
@@ -6,10 +6,10 @@ import RestaurantInterface from 'interfaces/restaurant';
 import ReservationForm from '@/components/reservation-component/ReservationForm';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import ButtonOptions from './ButtonOptions';
-
-import styles from '@/styles/restaurant.module.scss';
 import InfoBar from './AdditionalInfo/InfoBar';
 import FoodType from './AdditionalInfo/FoodType';
+
+import styles from '@/styles/restaurant.module.scss';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -18,10 +18,12 @@ interface Props {
 
 const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
 
+    const ref = useRef(null)
     const { isLoggedIn } = useContext(AuthContext);
+    const [ isReviewOpen, setIsReviewOpen ] = useState<boolean>(false);
     const router = useRouter();
 
-    const addToFavorites = () => {
+    const addToFavorites = (): void => {
         if(isLoggedIn){
             router.push('/');
         }else{
@@ -40,7 +42,9 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
                     </div>   
                     <InfoBar priceLevel={restaurant.priceLevel} hasGarten={restaurant.hasGarten}/>
                     <p className={styles.description}>{ restaurant.description }</p>
-                    <ButtonOptions addToFavorites={addToFavorites}/>     
+                    <ButtonOptions 
+                        addToFavorites={addToFavorites}
+                    />     
                 </div>
                 <div className={styles.imageContainer}>
                     <img className={ styles.img } src={ restaurant.img } alt={ restaurant.name }/>
@@ -58,7 +62,6 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
                     <p className={styles.email}>{restaurant.email}</p>
                 </div>
             </div>
-            <div>Our Menu</div>
         </div>
     )
 }
