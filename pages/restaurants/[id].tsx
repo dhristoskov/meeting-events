@@ -32,6 +32,22 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
       setIsVisible(true);
     };
 
+    const onFavoritesHandler = async () => {
+      const token = cookie.get('token');
+      await axios.put('/api/user-profile/profile', { id }, 
+            { headers: 
+              { 
+                Authorization: token, 
+                'Content-Type': 'application/json'
+              } 
+            })
+             .then(res => {
+                showNotification({message: 'Favorites updated', type: 'success'});
+             }).catch(err => {
+                showNotification({message: err.response.data.msg, type: 'alert'});
+             });
+    }
+
     const guestReservation = async (reservation: ReservationData) => {
       const Data = {  id, ...reservation }
       await axios.post('/api/reservations/guest', Data, 
@@ -88,6 +104,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
         <RestaurantItem 
             restaurant={restaurant} 
             onModalHandler={onModalHandler}
+            onFavoritesHandler={onFavoritesHandler}
         />
       </div>
         

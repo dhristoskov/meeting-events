@@ -15,16 +15,17 @@ import styles from '@/styles/restaurant.module.scss';
 interface Props {
     restaurant: RestaurantInterface;
     onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
+    onFavoritesHandler: () => void;
 }
 
-const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
+const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler, onFavoritesHandler }) => {
 
     const { isLoggedIn } = useContext(AuthContext);
     const router = useRouter();
 
     const addToFavorites = (): void => {
         if(isLoggedIn){
-            router.push('/');
+            onFavoritesHandler();
         }else{
             router.push('/auth');
         }

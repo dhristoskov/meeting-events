@@ -16,7 +16,7 @@ const requestHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
         await userByIdHandler(req, res);
         break;
-    case 'POST':
+    case 'PUT':
         await updateFavorites(req, res);
         break;
     default:
@@ -51,10 +51,9 @@ const userByIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(201).json({ user });
 };
 
-//To Be Finished !!!!!!!
 const updateFavorites = async (req: NextApiRequest, res: NextApiResponse) => {
 
-    const { id } = req.query;
+    const { id } = req.body;
 
     if (!('authorization' in req.headers)) {
         return res.status(401).send('No authorization token');
@@ -66,7 +65,7 @@ const updateFavorites = async (req: NextApiRequest, res: NextApiResponse) => {
             req.headers.authorization,
             process.env.JWT_SECRET
         ) as StoredTokenData;
-        user = await User.findOne( { _id: userId }, { password: 0} );
+        user = await User.findOne( { _id: userId } );
     }catch(err){
         res.status(500).send({ msg: 'Server Error' })
     }
@@ -87,8 +86,9 @@ const updateFavorites = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-        if(user.favorites.includes(restaurant)){
-            console.log('it is part')
+        if(user.favorites.includes(restaurant._id)){
+            const index = user.favorites.indexOf(restaurant._id);
+            user.favorites.splice(index, 1);
         }else {
             user.favorites.push(restaurant);
         }
