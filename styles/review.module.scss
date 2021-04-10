@@ -1,0 +1,38 @@
+@import './color-variable.scss';
+
+.wrapper {
+    width: 40%;
+    max-height: 450px;
+    margin-bottom: 50px;
+    overflow: auto;
+
+    .review{
+        border: 1px solid $icon-light;
+        padding: 10px;
+        margin-bottom: 10px;
+        .info{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .states{
+                display: flex;
+                align-items: center;
+                .stars {
+                    font-size: 20px;
+                    color: $icon-light;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .context {
+            margin: 10px 0;
+        }
+
+        .date {
+            text-align: end;
+        }
+    }
+  
+}

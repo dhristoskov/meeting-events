@@ -20,10 +20,9 @@ const updateUser = async  (req: NextApiRequest, res: NextApiResponse)  => {
 
         const { email, avatar } = req.body;
 
-        // TO MAKE A CHECK !!!!!
-        // if (!isEmail(email)) {
-        //     return res.status(422).send('Email must be valid address');
-        // }
+        if (email && !isEmail(email)) {
+            return res.status(422).send('Email must be valid address');
+        }
 
         let user: UserInterface | null = null;
         try{

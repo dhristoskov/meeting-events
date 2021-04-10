@@ -14,10 +14,9 @@ const reviewSchema = new mongoose.Schema({
         require: true,
         minLength: 20
     },
-    restaurants: {
-        type: mongoose.Schema.Types.ObjectId, 
-        required: true, 
-        ref: 'Restaurant'
+    username: {
+        type: String,
+        require: true,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId, 

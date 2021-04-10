@@ -2,9 +2,9 @@ import { NextPage } from "next";
 
 import RestaurantInterface from "interfaces/restaurant";
 import CostumerStats from "./RestaurantItem/AdditionalInfo/CostumerStats";
+import FoodType from "./RestaurantItem/AdditionalInfo/FoodType";
 
 import styles from '@/styles/restaurant.module.scss';
-import FoodType from "./RestaurantItem/AdditionalInfo/FoodType";
 
 interface Props {
     restaurant: RestaurantInterface;

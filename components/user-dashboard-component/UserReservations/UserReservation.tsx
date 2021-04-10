@@ -6,7 +6,7 @@ import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 import ReservationHeader from './ReservationHeader/RservationHeader';
 import ReservationInterface from 'interfaces/reservation';
 
-import styles from '@/styles/dashboard.module.scss';
+import styles from '@/styles/dashboard-reservation.module.scss';
 
 interface Props {
     reservations: ReservationInterface[]

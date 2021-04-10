@@ -10,6 +10,7 @@ import InfoBar from './AdditionalInfo/InfoBar';
 import FoodType from './AdditionalInfo/FoodType';
 
 import styles from '@/styles/restaurant.module.scss';
+import ReviewSection from './ReviewSection';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -18,9 +19,7 @@ interface Props {
 
 const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
 
-    const ref = useRef(null)
     const { isLoggedIn } = useContext(AuthContext);
-    const [ isReviewOpen, setIsReviewOpen ] = useState<boolean>(false);
     const router = useRouter();
 
     const addToFavorites = (): void => {
@@ -61,7 +60,8 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
                     <p className={styles.url}>{restaurant.urlAddress}</p>
                     <p className={styles.email}>{restaurant.email}</p>
                 </div>
-            </div>
+            </div>   
+            <ReviewSection restaurant={restaurant}/>   
         </div>
     )
 }

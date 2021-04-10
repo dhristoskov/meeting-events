@@ -12,7 +12,7 @@ const getRestaurantById = async (req: NextApiRequest, res: NextApiResponse) => {
 
         let restaurant: RestaurantInterface | null = null;
         try{
-            restaurant = await Restaurant.findOne({_id: id }).exec();
+            restaurant = await Restaurant.findOne({_id: id }).populate('reviews').exec();
         }catch(err){
             res.status(500).send({msg: 'Can not find that restaurant'});
         }
