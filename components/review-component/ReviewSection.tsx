@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { IoRibbonOutline } from 'react-icons/io5'; 
+import { useContext } from 'react';
 
+import { AuthContext } from 'context/auth-context/AuthContext';
 import RestaurantInterface from "interfaces/restaurant";
 import ReviewInterface from "interfaces/review";
 
@@ -12,6 +14,8 @@ interface Props {
 
 const ReviewSection: NextPage<Props> = ({ restaurant }) => {
 
+    const { isLoggedIn } = useContext(AuthContext);
+
     let reviews: ReviewInterface[] = []
 
     if(restaurant.reviews.length > 0){
@@ -21,6 +25,9 @@ const ReviewSection: NextPage<Props> = ({ restaurant }) => {
 
     return (
         <div className={styles.wrapper}>
+            {
+                isLoggedIn && <p className={styles.add}>Add review</p>
+            } 
             {
                 reviews.length > 0 ? reviews.map(item => {
                     return (
@@ -37,7 +44,7 @@ const ReviewSection: NextPage<Props> = ({ restaurant }) => {
                             <p className={styles.date}>{ new Date(item.created).toLocaleDateString('de-DE',  { day:'numeric', month: 'long', year: 'numeric' }) }</p>
                         </div>
                     )
-                }) : <p>No reviews</p>
+                }) : <p>{ isLoggedIn ? 'Be the first to add review' : 'No reviews' }</p>
             }
         </div>
     )

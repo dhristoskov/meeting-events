@@ -1,16 +1,16 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import { IoHeartOutline } from 'react-icons/io5';
 
 import RestaurantInterface from 'interfaces/restaurant';
 import ReservationForm from '@/components/reservation-component/ReservationForm';
 import { AuthContext } from 'context/auth-context/AuthContext';
-import ButtonOptions from './ButtonOptions';
 import InfoBar from './AdditionalInfo/InfoBar';
 import FoodType from './AdditionalInfo/FoodType';
+import ReviewSection from '../../review-component/ReviewSection';
 
 import styles from '@/styles/restaurant.module.scss';
-import ReviewSection from './ReviewSection';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -37,13 +37,13 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler }) => {
                 <div className={styles.info}>
                     <div className={styles.firstline}>
                         <h3 className={styles.uppername}>{ restaurant.name }</h3>
-                        <FoodType kitchen_type={restaurant.kitchen_type} />
+                        <div className={styles.secondline}>
+                            <FoodType kitchen_type={restaurant.kitchen_type} />
+                            <IoHeartOutline className={styles.icon} onClick={addToFavorites}/>
+                        </div>                    
                     </div>   
                     <InfoBar priceLevel={restaurant.priceLevel} hasGarten={restaurant.hasGarten}/>
-                    <p className={styles.description}>{ restaurant.description }</p>
-                    <ButtonOptions 
-                        addToFavorites={addToFavorites}
-                    />     
+                    <p className={styles.description}>{ restaurant.description }</p>  
                 </div>
                 <div className={styles.imageContainer}>
                     <img className={ styles.img } src={ restaurant.img } alt={ restaurant.name }/>

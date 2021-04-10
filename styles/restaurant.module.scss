@@ -33,16 +33,29 @@
                     margin-bottom: 10px;
                 }
 
-                .kitchen {
+                .secondline {
                     display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    align-items: center;
 
-                    .type {
-                        margin-right: 10px;
-                        padding: 2px 5px;
-                        border: 1px solid $icon-light;
+                    .icon {
+                        font-size: 25px;
                         color: $icon-light;
+                        cursor: pointer;
                     }
-                }
+
+                    .kitchen {
+                        display: flex;
+    
+                        .type {
+                            margin-right: 10px;
+                            padding: 2px 5px;
+                            border: 1px solid $icon-light;
+                            color: $icon-light;
+                        }
+                    }
+                }   
             }
 
             .addinfo {
@@ -60,28 +73,6 @@
                     font-size: 20px;
                     color: $icon-light;
                     margin-right: 10px;
-                }
-            }
-        
-            .buttons {
-                margin-top: 25px;
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-
-                .btn {
-                    font-size: 16px;
-                    width: 150px;
-                    text-align: center;
-                    font-weight: 600;
-                    padding: 5px 15px;
-                    outline: none;
-                    border: none;
-                    border-radius: 20px;
-                    color: $color-white;
-                    letter-spacing: .5px;
-                    background-color: $icon-dark;
-                    cursor: pointer;
                 }
             }
 

@@ -3,7 +3,7 @@ import isLength from 'validator/lib/isLength';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
-import connectDB from '../../../../middleware/mongoose';
+import connectDB from '../../../middleware/mongoose';
 import RestaurantInterface from "interfaces/restaurant";
 import Restaurant from "models/restaurant";
 import UserInterface from 'interfaces/user';

@@ -6,6 +6,12 @@
     margin-bottom: 50px;
     overflow: auto;
 
+    .add {
+        cursor: pointer;
+        color: $icon-light;
+        margin-bottom: 5px;
+    }
+
     .review{
         border: 1px solid $icon-light;
         padding: 10px;
