@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connectDB from '../../../middleware/mongoose';
 import CityInterface from 'interfaces/city';
 import City from 'models/city';
-import RestaurantInterface from 'interfaces/restaurant';
 
 const getRestaurantsCitys = async (req: NextApiRequest, res: NextApiResponse) => {
 

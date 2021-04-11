@@ -3,25 +3,17 @@ import { IoRibbonOutline } from 'react-icons/io5';
 import { useContext } from 'react';
 
 import { AuthContext } from 'context/auth-context/AuthContext';
-import RestaurantInterface from "interfaces/restaurant";
 import ReviewInterface from "interfaces/review";
 
 import styles from '@/styles/review.module.scss';
 
 interface Props {
-    restaurant: RestaurantInterface;
+    reviews: ReviewInterface[];
 }
 
-const ReviewSection: NextPage<Props> = ({ restaurant }) => {
+const ReviewSection: NextPage<Props> = ({ reviews }) => {
 
     const { isLoggedIn } = useContext(AuthContext);
-
-    let reviews: ReviewInterface[] = []
-
-    if(restaurant.reviews.length > 0){
-        reviews = restaurant.reviews;
-    }
- 
 
     return (
         <div className={styles.wrapper}>
@@ -44,7 +36,7 @@ const ReviewSection: NextPage<Props> = ({ restaurant }) => {
                             <p className={styles.date}>{ new Date(item.created).toLocaleDateString('de-DE',  { day:'numeric', month: 'long', year: 'numeric' }) }</p>
                         </div>
                     )
-                }) : <p>{ isLoggedIn ? 'Be the first to add review' : 'No reviews' }</p>
+                }) : <p>{isLoggedIn ? 'Be the first to add review' : 'No reviews' }</p>
             }
         </div>
     )

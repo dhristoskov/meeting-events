@@ -18,6 +18,11 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    restaurant: {
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'Restaurant'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import isLength from 'validator/lib/isLength';
-import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 import connectDB from '../../../middleware/mongoose';
@@ -19,6 +18,9 @@ const requestHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
     case 'POST':
         await addNewReview(req, res);
+        break;
+    case 'GET':
+        await getReviewByRestaurant(req, res);
         break;
     default:
         res.status(405).send(`Method ${req.method} not allowed`);
@@ -75,17 +77,38 @@ const addNewReview = async (req: NextApiRequest, res: NextApiResponse) => {
             stars,
             context,
             username: user.username,
+            restaurant,
             user
         });
 
-        const session = await mongoose.startSession();
-        session.startTransaction();
-        await review.save({session: session});
-        restaurant.reviews.push(review);
-        await restaurant.save({session: session});
-        await session.commitTransaction();
+        await review.save();
         res.status(201).json({ review });
     }catch(err) {
         res.status(500).send({msg: 'Creating a new review failed, please try again'});
     };
 };
+
+
+const getReviewByRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
+
+    const { id } = req.query;
+
+    let restaurant: RestaurantInterface | null = null;
+    try{
+        restaurant = await Restaurant.findById(id).exec();
+    }catch(err){
+        res.status(500).send({msg: 'Can not find that restaurant'});
+    }
+    if(!restaurant){
+        return res.status(403).json({ msg: 'Restaurant not found' });
+    }
+
+    let reviews: ReviewInterface[] = [];
+    try{
+        reviews = await Review.find({ restaurant }, { restaurant: 0, user: 0 }).sort({ created: 1 }).exec();
+    }catch(err){
+        res.status(500).send({msg: 'Fatching reviews failed, please try again'});
+    }
+
+    res.status(201).json({ reviews });
+}

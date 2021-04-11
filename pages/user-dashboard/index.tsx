@@ -38,6 +38,15 @@ export default UserProfilePage;
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
 
     const { token } = parseCookies(ctx);
+
+    if ( !token ) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      }
+    }
     const urlProfile = `http://localhost:3000/api/user-profile/profile`;
     const urlReservations = `http://localhost:3000/api/reservations/user`;
 
@@ -55,15 +64,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
         profile = responses[0].data.user;
         reservations = responses[1].data.reservations;
       }));
-
-    if ( !token ) {
-        return {
-          redirect: {
-            destination: '/',
-            permanent: false,
-          },
-        }
-    }
 
     return {
        props: { user: profile, reservations }

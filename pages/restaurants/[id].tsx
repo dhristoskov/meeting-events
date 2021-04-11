@@ -12,12 +12,14 @@ import { Notification } from 'context/notification-context/Notification';
 import { AuthContext } from 'context/auth-context/AuthContext';
 import ReservationData from "interfaces/reservationData";
 import { ReservationContext } from "context/reservation-context/ReservationContext";
+import ReviewInterface from "interfaces/review";
 
 interface Props {
     restaurant: RestaurantInterface;
+    reviews: ReviewInterface[];
 }
 
-const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
+const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
 
     const router = useRouter();
     const { id } = router.query;
@@ -103,8 +105,9 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant }) => {
         </Modal>
         <RestaurantItem 
             restaurant={restaurant} 
+            reviews={reviews}
             onModalHandler={onModalHandler}
-            onFavoritesHandler={onFavoritesHandler}
+            onFavoritesHandler={onFavoritesHandler}           
         />
       </div>
         
@@ -117,11 +120,26 @@ export default RestaurantInfo;
 export const getServerSideProps: GetServerSideProps<Props> = async ({ query: { id } }) => {
 
     const data = { params: { id } };
-    const url = `http://localhost:3000/api/restaurant/get-restaurant/`;
-  
-    const response = await axios.get(url, data);
-  
-    if ( !response  ) {
+
+    const urlRestaurant = `http://localhost:3000/api/restaurant/get-restaurant/`;
+    const urlReviews = `http://localhost:3000/api/review`;
+
+    let restaurant: RestaurantInterface = null;
+    let reviews: ReviewInterface[] = [];
+
+    const responseRestaurant = axios.get(urlRestaurant, data);
+    const responseReviews = axios.get(urlReviews, data);
+
+    await axios.all([
+      responseRestaurant,
+      responseReviews
+    ])
+    .then(axios.spread((...responses) => {
+      restaurant = responses[0].data.restaurant;
+      reviews = responses[1].data.reviews;
+    }));
+
+    if ( !restaurant  ) {
         return {
           redirect: {
             destination: '/',
@@ -131,6 +149,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ query: { i
     }
   
     return {
-       props: { restaurant: response.data.restaurant }
+       props: { restaurant, reviews }
     };
   }

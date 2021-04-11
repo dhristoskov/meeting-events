@@ -11,14 +11,16 @@ import FoodType from './AdditionalInfo/FoodType';
 import ReviewSection from '../../review-component/ReviewSection';
 
 import styles from '@/styles/restaurant.module.scss';
+import ReviewInterface from 'interfaces/review';
 
 interface Props {
     restaurant: RestaurantInterface;
+    reviews: ReviewInterface[];
     onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
     onFavoritesHandler: () => void;
 }
 
-const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler, onFavoritesHandler }) => {
+const RestaurantItem: NextPage<Props> = ({ restaurant, reviews, onModalHandler, onFavoritesHandler }) => {
 
     const { isLoggedIn } = useContext(AuthContext);
     const router = useRouter();
@@ -62,7 +64,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, onModalHandler, onFavorit
                     <p className={styles.email}>{restaurant.email}</p>
                 </div>
             </div>   
-            <ReviewSection restaurant={restaurant}/>   
+            <ReviewSection reviews={reviews}/>   
         </div>
     )
 }

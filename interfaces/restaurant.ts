@@ -1,7 +1,6 @@
 import * as mongoose from 'mongoose';
 
 import ReservationInterface from './reservation';
-import ReviewInterface from './review';
 
 export default interface RestaurantInterface extends mongoose.Document{
     name: string;
@@ -15,6 +14,5 @@ export default interface RestaurantInterface extends mongoose.Document{
     priceLevel: string;
     description: string;
     reservations: ReservationInterface[];
-    reviews: ReviewInterface[];
     created: Date;
 }
