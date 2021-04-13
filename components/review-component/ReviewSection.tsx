@@ -1,25 +1,31 @@
 import { NextPage } from "next";
 import { IoRibbonOutline } from 'react-icons/io5'; 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { AuthContext } from 'context/auth-context/AuthContext';
 import ReviewInterface from "interfaces/review";
 
 import styles from '@/styles/review.module.scss';
+import ReviewForm from "./ReviewForm";
 
 interface Props {
     reviews: ReviewInterface[];
+    onAddReviewHandler: (review: { stars: number, context: string}) => void;
 }
 
-const ReviewSection: NextPage<Props> = ({ reviews }) => {
+const ReviewSection: NextPage<Props> = ({ reviews, onAddReviewHandler }) => {
 
     const { isLoggedIn } = useContext(AuthContext);
+    const [ isOpen, setIsOpen ] = useState<boolean>(false);
 
     return (
         <div className={styles.wrapper}>
             {
-                isLoggedIn && <p className={styles.add}>Add review</p>
+                isLoggedIn && <p className={styles.add} onClick={() => setIsOpen(true)}>Add review</p>
             } 
+            {
+                isOpen  && <ReviewForm setIsOpen={setIsOpen} onAddReviewHandler={onAddReviewHandler}/>
+            }
             {
                 reviews.length > 0 ? reviews.map(item => {
                     return (

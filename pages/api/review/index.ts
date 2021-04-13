@@ -9,6 +9,8 @@ import UserInterface from 'interfaces/user';
 import User from 'models/user';
 import ReviewInterface from 'interfaces/review';
 import Review from 'models/review';
+import ReservationInterface from 'interfaces/reservation';
+import Reservation from 'models/reservation';
 
 interface StoredTokenData {
     userId: string;
@@ -37,7 +39,7 @@ const addNewReview = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).send('No authorization token');
     }
 
-    const { stars, context, restaurantId } = req.body;
+    const { stars, context, id } = req.body;
 
     if (!isLength(context, { min: 20 })) {
          return res.status(422).send('Review must be at least 20 characters long');
@@ -60,7 +62,7 @@ const addNewReview = async (req: NextApiRequest, res: NextApiResponse) => {
 
     let restaurant: RestaurantInterface | null = null;
     try{
-        restaurant = await Restaurant.findOne({_id: restaurantId }).exec();
+        restaurant = await Restaurant.findOne({_id: id }).exec();
     }catch(err){
         res.status(500).send({msg: 'Can not find that restaurant'});
     }
@@ -68,8 +70,15 @@ const addNewReview = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(403).json({ msg: 'Restaurant not found' });
     }
 
-    if(!user.reservations.includes(restaurant._id)){
-        return res.status(422).json({ msg: 'Do not have right to make review' })
+    let reservation: ReservationInterface | null = null;
+    try{
+        reservation = await Reservation.findOne({ userId: user._id, restaurantId: restaurant._id}).exec();
+    }catch(err){
+        res.status(500).send({msg: 'Can not find that reservation'});
+    }
+
+    if(!reservation){
+        return res.status(403).json({ msg: 'You dont have right to give a review' });
     }
 
     try {

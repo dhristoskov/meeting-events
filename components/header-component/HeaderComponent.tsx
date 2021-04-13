@@ -24,9 +24,9 @@ const HeaderComponent = () => {
                 <div className={styles.left}>
                     <LogoBtnComponent /> 
                     <CityPicker />
-                    <Search />
-                </div>
-            <SettingsComponent />       
+                    <Search />             
+                </div>  
+                <SettingsComponent />             
             </div>
         </Fragment>
    

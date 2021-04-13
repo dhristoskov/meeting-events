@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { GetServerSideProps, NextPage } from "next";
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router'
@@ -29,10 +29,32 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
     const { showNotification } = useContext(Notification);
     const [ isVisible, setIsVisible ] = useState<boolean>(false);
 
+    const refreshData = useCallback(() => {
+      router.replace(router.asPath)
+    }, []);
+
     const onModalHandler = (reservationData: {startDate: Date, guests: number}): void => {
       setUserReservation(reservationData);
       setIsVisible(true);
     };
+
+    const onAddReviewHandler = async (review: { stars: number, context: string}) => {
+      const token = cookie.get('token');
+      const Data = {  id, ...review }
+      await axios.post('/api/review', Data, 
+            { headers: 
+              { 
+                Authorization: token, 
+                'Content-Type': 'application/json'
+              } 
+            })
+             .then(res => {
+                showNotification({message: 'Review published', type: 'success'});
+                refreshData();
+             }).catch(err => {
+                showNotification({message: err.response.data.msg, type: 'alert'});
+             });
+    }
 
     const onFavoritesHandler = async () => {
       const token = cookie.get('token');
@@ -107,7 +129,8 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
             restaurant={restaurant} 
             reviews={reviews}
             onModalHandler={onModalHandler}
-            onFavoritesHandler={onFavoritesHandler}           
+            onFavoritesHandler={onFavoritesHandler}   
+            onAddReviewHandler={onAddReviewHandler}        
         />
       </div>
         

@@ -16,11 +16,18 @@ import ReviewInterface from 'interfaces/review';
 interface Props {
     restaurant: RestaurantInterface;
     reviews: ReviewInterface[];
+    onAddReviewHandler: (review: { stars: number, context: string}) => void;
     onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
     onFavoritesHandler: () => void;
 }
 
-const RestaurantItem: NextPage<Props> = ({ restaurant, reviews, onModalHandler, onFavoritesHandler }) => {
+const RestaurantItem: NextPage<Props> = ({ 
+    restaurant, 
+    reviews, 
+    onModalHandler, 
+    onFavoritesHandler, 
+    onAddReviewHandler
+}) => {
 
     const { isLoggedIn } = useContext(AuthContext);
     const router = useRouter();
@@ -64,7 +71,7 @@ const RestaurantItem: NextPage<Props> = ({ restaurant, reviews, onModalHandler, 
                     <p className={styles.email}>{restaurant.email}</p>
                 </div>
             </div>   
-            <ReviewSection reviews={reviews}/>   
+            <ReviewSection reviews={reviews} onAddReviewHandler={onAddReviewHandler}/>   
         </div>
     )
 }

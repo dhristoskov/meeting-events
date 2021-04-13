@@ -3,6 +3,10 @@ import * as mongoose from 'mongoose';
 import ReservationInterface from 'interfaces/reservation';
 
 const reservationSchema = new mongoose.Schema({
+    userId: {
+        type: String, 
+        required: false,
+    },
     first_name: { 
         type: String, 
         required: true,

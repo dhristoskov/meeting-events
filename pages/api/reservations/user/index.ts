@@ -68,7 +68,6 @@ const addNewReservation = async (req: NextApiRequest, res: NextApiResponse) => {
         last_name, 
         email, 
         guests, 
-        restaurantId,
         reservationDate, 
         restaurantName,
         restaurantAddress,
@@ -111,11 +110,12 @@ const addNewReservation = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
         const rsrv: ReservationInterface = new Reservation({
+            userId: user._id,
             first_name, 
             last_name, 
             email, 
             guests, 
-            restaurantId,
+            restaurantId: restaurant._id,
             reservationDate,
             restaurantName,
             restaurantAddress,
