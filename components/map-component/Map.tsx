@@ -20,7 +20,7 @@ const Map: NextPage<Props> = ({ restaurant }) => {
   return (
     <div>
       <MapContainer
-        style={{ width:'450px', height: '450px'}}
+        style={{ width:'400px', height: '450px'}}
         scrollWheelZoom={false}
         center={defaultPosition}
         zoom={zoom}

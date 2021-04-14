@@ -12,7 +12,6 @@ import FoodType from './AdditionalInfo/FoodType';
 import ReviewSection from '../../review-component/ReviewSection';
 import ReviewInterface from 'interfaces/review';
 import Weather from '@/components/weather-component/Weather';
-import Map from '@/components/map-component/Map';
 
 import styles from '@/styles/restaurant.module.scss';
 
