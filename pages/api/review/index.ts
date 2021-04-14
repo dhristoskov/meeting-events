@@ -81,6 +81,13 @@ const addNewReview = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(403).json({ msg: 'You dont have right to give a review' });
     }
 
+    const reservationTime = reservation.reservationDate.getTime()
+    const isItAllowed = reservationTime >= Date.now()
+
+    if(isItAllowed){
+        return res.status(403).json({ msg: 'Your reservation time is in the future' });
+    }
+
     try {
         const review: ReviewInterface = new Review ({
             stars,

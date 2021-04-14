@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext, useState } from 'react';
+// import axios from 'axios';
 import { useRouter } from "next/router";
 import { ReservationContext } from 'context/reservation-context/ReservationContext';
 
@@ -13,15 +13,15 @@ const CityPicker= () => {
 
 
     //To integrate it!!!!
-    useEffect(() => {
-        axios.get('https://ipapi.co/json')
-            .then(response => {
-                console.log(response.data.city);
-            })
-            .catch(err => {
-                console.log('Request failed');
-            })
-    }, [])
+    // useEffect(() => {
+    //     axios.get('https://ipapi.co/json')
+    //         .then(response => {
+    //             console.log(response.data.city);
+    //         })
+    //         .catch(err => {
+    //             console.log('Request failed');
+    //         })
+    // }, [])
 
     const toggleSelect = (): void => {
         setListState(prevState => !prevState);

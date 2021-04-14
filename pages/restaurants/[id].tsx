@@ -28,7 +28,7 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
     const { setUserReservation } = useContext(ReservationContext);
     const { showNotification } = useContext(Notification);
     const [ isVisible, setIsVisible ] = useState<boolean>(false);
-
+    
     const refreshData = useCallback(() => {
       router.replace(router.asPath)
     }, []);

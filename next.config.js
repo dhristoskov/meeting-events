@@ -12,7 +12,8 @@ module.exports = {
   env: {
     MONGODB_URI: "mongodb+srv://dimitar_hristoskov:HO6tzQdS8WE5Rs3C@cluster0.ghk0w.mongodb.net/eventsDB?retryWrites=true&w=majority",
     JWT_SECRET: "hWmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+Mb",
-    CLOUDINARY_URL: 'https://api.cloudinary.com/v1_1/eventsgallery/image/upload'
+    CLOUDINARY_URL: 'https://api.cloudinary.com/v1_1/eventsgallery/image/upload',
+    WEATHER_API_KEY: '961db6690ab141be812183752211304'
   }
 }
 

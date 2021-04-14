@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { IoHeartOutline } from 'react-icons/io5';
+import dynamic from "next/dynamic";
 
 import RestaurantInterface from 'interfaces/restaurant';
 import ReservationForm from '@/components/reservation-component/ReservationForm';
@@ -9,9 +10,11 @@ import { AuthContext } from 'context/auth-context/AuthContext';
 import InfoBar from './AdditionalInfo/InfoBar';
 import FoodType from './AdditionalInfo/FoodType';
 import ReviewSection from '../../review-component/ReviewSection';
+import ReviewInterface from 'interfaces/review';
+import Weather from '@/components/weather-component/Weather';
+import Map from '@/components/map-component/Map';
 
 import styles from '@/styles/restaurant.module.scss';
-import ReviewInterface from 'interfaces/review';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -28,6 +31,10 @@ const RestaurantItem: NextPage<Props> = ({
     onFavoritesHandler, 
     onAddReviewHandler
 }) => {
+
+    const Map = dynamic(() => import('@/components/map-component/Map'), {
+        ssr: false
+      });
 
     const { isLoggedIn } = useContext(AuthContext);
     const router = useRouter();
@@ -62,9 +69,12 @@ const RestaurantItem: NextPage<Props> = ({
             <div className={styles.middle}>
                 <div className={ styles.reservation }>
                     <ReservationForm onModalHandler={onModalHandler}/>
+                    <Weather restaurant={restaurant} />        
                 </div>
                 <div className={styles.moreinfo}>
-                    <p>Google Maps</p>
+                    <div>
+                        <Map restaurant={restaurant}/>
+                    </div>                 
                     <h3 className={styles.name}>{ restaurant.name }</h3>
                     <p className={styles.location}>{restaurant.location}</p>
                     <p className={styles.url}>{restaurant.urlAddress}</p>
