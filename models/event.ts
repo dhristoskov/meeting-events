@@ -8,6 +8,10 @@ const eventSchema = new mongoose.Schema({
         required: true,
         minlength: 2,
     },
+    img: {
+        type: String,
+        require: false
+    },
     email: {
         type: String, 
         required: false,
@@ -23,6 +27,14 @@ const eventSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
+    area: {
+        type: String, 
+        required: true
+    },
+    price: {
+        type: Number,
+        require: true
+    },
     description: {
         type: String,
         required: true,
@@ -33,6 +45,11 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         require: true
     },
+    reservations: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'Reservation'
+    }],
     created: {
         type: Date,
         required: true,
