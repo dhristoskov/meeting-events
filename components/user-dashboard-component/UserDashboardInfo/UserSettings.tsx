@@ -102,9 +102,9 @@ const UserSettings: NextPage<Props> = ({ refreshData }) => {
             </Modal>
             <div className={styles.settings}>
                 <div className={styles.menu}>
-                    <p onClick={() => onEmailChange('email')}>Add/Change E-mail</p>
-                    <p onClick={() => onEmailChange('password')}>Change password</p>
-                    <p onClick={() => onEmailChange('delete')}>Delete profile</p>
+                    <p onClick={() => onEmailChange('email')}>Change Email</p>
+                    <p onClick={() => onEmailChange('password')}>Change Password</p>
+                    <p onClick={() => onEmailChange('delete')}>Delete Profile</p>
                     <p>Wallet</p>
                 </div>
             </div> 

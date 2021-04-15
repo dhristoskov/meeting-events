@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-import { ValidateInput } from '@/components/utils/formValidator';
+import { ValidateInput } from '@/components/helper/formValidator';
 import PasswordField from '@/components/auth-component/PasswordField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
 import { RegistrationUser } from 'interfaces/registrationUser';

@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 
 import EmailField from '@/components/auth-component/EmailField';
 import SubmitButton from '@/components/auth-component/SubmitButton';
-import { ValidateInput } from '@/components/utils/formValidator';
+import { ValidateInput } from '@/components/helper/formValidator';
 
 import styles from '@/styles/auth.module.scss';
 

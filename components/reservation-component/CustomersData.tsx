@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState, useContext } from 'react';
 import { NextPage } from 'next';
 
 import SubmitButton from '@/components/auth-component/SubmitButton';
-import { ValidateInput } from '@/components/utils/formValidator';
+import { ValidateInput } from '@/components/helper/formValidator';
 import TextInputField from '../auth-component/TextInputField';
 import ReservationData from 'interfaces/reservationData';
 import RestaurantInterface from 'interfaces/restaurant';
