@@ -4,15 +4,17 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import RestaurantInterface from "interfaces/restaurant";
 import { ValidateInput } from '@/components/helper/formValidator';
 
+import styles from '@/styles/newsletter.module.scss'
+
 interface Props {
     restaurant: RestaurantInterface;
+    onNewsLetterHandler: (newsletter: { email: string}) => void;
 }
 
-const RestaurantNewsletter: NextPage<Props> = ({ restaurant }) => {
+const RestaurantNewsletter: NextPage<Props> = ({ restaurant, onNewsLetterHandler }) => {
 
     const [ errors, setErrors ] = useState<any>([]);
-    const [ newsletter, setNewsletter] = useState<{id: string, email: string}>({
-        id: restaurant._id,
+    const [ newsletter, setNewsletter] = useState<{ email: string}>({
         email: ''
      });
 
@@ -27,19 +29,19 @@ const RestaurantNewsletter: NextPage<Props> = ({ restaurant }) => {
 
     const onHandleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault(); 
-        console.log(newsletter);
+        onNewsLetterHandler(newsletter);
         setNewsletter({
-            email: '',
-            id: undefined
+            email: ''         
         });
     };
 
     return (
-        <div>
-            <form onSubmit={onHandleSubmit}>
-                <div>
+        <div className={styles.mine}>
+            <h4 className={styles.title}>Subscribe to "{restaurant.name}" news and offers</h4>
+            <form className={styles.form} onSubmit={onHandleSubmit}>
+                <div className={styles.field}>
                     <input type="text" name='email' value={email} placeholder='Subscribe to Newsletter' onChange={onHandleChange}/>
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p className={styles.error}>{errors.email}</p>}
                 </div>
                 <input type="submit" value='Subscibe'/>
             </form>

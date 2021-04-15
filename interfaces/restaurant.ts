@@ -14,5 +14,6 @@ export default interface RestaurantInterface extends mongoose.Document{
     priceLevel: string;
     description: string;
     reservations: ReservationInterface[];
+    newsletter: string[];
     created: Date;
 }

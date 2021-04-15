@@ -56,6 +56,10 @@ const restaurantSchema = new mongoose.Schema({
         required: true, 
         ref: 'Reservation'
     }],
+    newsletter: [{
+        type: String,
+        require: true
+    }],
     created: {
         type: Date,
         required: true,

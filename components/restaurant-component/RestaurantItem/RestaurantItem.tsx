@@ -14,12 +14,14 @@ import ReviewInterface from 'interfaces/review';
 import Weather from '@/components/weather-component/Weather';
 
 import styles from '@/styles/restaurant.module.scss';
+import RestaurantNewsletter from '@/components/newsletter-component/RestaurantNewsletter';
 
 interface Props {
     restaurant: RestaurantInterface;
     reviews: ReviewInterface[];
     onAddReviewHandler: (review: { stars: number, context: string}) => void;
     onModalHandler: (reservationData: {startDate: Date, guests: number}) => void;
+    onNewsLetterHandler: (newsletter: { email: string}) => void;
     onFavoritesHandler: () => void;
 }
 
@@ -28,7 +30,8 @@ const RestaurantItem: NextPage<Props> = ({
     reviews, 
     onModalHandler, 
     onFavoritesHandler, 
-    onAddReviewHandler
+    onAddReviewHandler,
+    onNewsLetterHandler
 }) => {
 
     const Map = dynamic(() => import('@/components/map-component/Map'), {
@@ -78,6 +81,10 @@ const RestaurantItem: NextPage<Props> = ({
                     <p className={styles.location}>{restaurant.location}</p>
                     <p className={styles.url}>{restaurant.urlAddress}</p>
                     <p className={styles.email}>{restaurant.email}</p>
+                    <RestaurantNewsletter 
+                        restaurant={restaurant} 
+                        onNewsLetterHandler={onNewsLetterHandler}
+                    />
                 </div>
             </div>   
             <ReviewSection reviews={reviews} onAddReviewHandler={onAddReviewHandler}/>   

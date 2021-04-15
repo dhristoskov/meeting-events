@@ -101,7 +101,7 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             priceLevel,
             description,
             reservations: [],
-            reviews: []
+            newsletter: []
         });
 
         const session = await mongoose.startSession();

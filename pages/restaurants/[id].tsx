@@ -72,6 +72,17 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
              });
     }
 
+    const onNewsLetterHandler = async ( newsletter: { email: string }) => {
+      const Data = {  id, ...newsletter }
+      await axios.put('/api/newsletter', Data, 
+        { headers: {'Content-Type': 'application/json'}})
+             .then(res => {
+                showNotification({message: 'Subscribed successfully', type: 'success'});
+             }).catch(err => {
+                showNotification({message: err.response.data.msg, type: 'alert'});
+             });
+    }
+
     const guestReservation = async (reservation: ReservationData) => {
       const Data = {  id, ...reservation }
       await axios.post('/api/reservations/guest', Data, 
@@ -130,7 +141,8 @@ const RestaurantInfo: NextPage<Props> = ({ restaurant, reviews }) => {
             reviews={reviews}
             onModalHandler={onModalHandler}
             onFavoritesHandler={onFavoritesHandler}   
-            onAddReviewHandler={onAddReviewHandler}        
+            onAddReviewHandler={onAddReviewHandler}    
+            onNewsLetterHandler={onNewsLetterHandler}    
         />
       </div>
         
