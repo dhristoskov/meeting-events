@@ -12,9 +12,10 @@ import FoodType from './AdditionalInfo/FoodType';
 import ReviewSection from '../../review-component/ReviewSection';
 import ReviewInterface from 'interfaces/review';
 import Weather from '@/components/weather-component/Weather';
+import RestaurantNewsletter from '@/components/newsletter-component/RestaurantNewsletter';
 
 import styles from '@/styles/restaurant.module.scss';
-import RestaurantNewsletter from '@/components/newsletter-component/RestaurantNewsletter';
+import RestaurantBoard from './AdditionalInfo/RestaurantBoard';
 
 interface Props {
     restaurant: RestaurantInterface;
@@ -74,13 +75,8 @@ const RestaurantItem: NextPage<Props> = ({
                     <Weather restaurant={restaurant} />        
                 </div>
                 <div className={styles.moreinfo}>
-                    <div>
-                        <Map restaurant={restaurant}/>
-                    </div>                 
-                    <h3 className={styles.name}>{ restaurant.name }</h3>
-                    <p className={styles.location}>{restaurant.location}</p>
-                    <p className={styles.url}>{restaurant.urlAddress}</p>
-                    <p className={styles.email}>{restaurant.email}</p>
+                    <Map restaurant={restaurant}/>                
+                    <RestaurantBoard restaurant={restaurant} />
                     <RestaurantNewsletter 
                         restaurant={restaurant} 
                         onNewsLetterHandler={onNewsLetterHandler}

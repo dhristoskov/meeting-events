@@ -17,15 +17,17 @@ const InfoBar: NextPage<Props> = ({ priceLevel, hasGarten }) => {
             case 'low': return ' €';
             case 'medium' : return ' € €';
             case 'high' : return ' € € €';
-            case 'very high' : return ' € € € €';
+            case 'very high' : return ' € € € +';
         }
     }
 
     return (
         <div className={styles.addinfo}>
             <CostumerStats />
-            <div className={styles.states}><IoCashOutline className={styles.stars} /> 
-            { priceLevelSwitcher(priceLevel) }</div>
+            <div className={styles.states}>
+                <IoCashOutline className={styles.stars} /> 
+                { priceLevelSwitcher(priceLevel) }
+            </div>
             {
                 hasGarten && 
                 <div className={styles.states}><IoSunnyOutline className={styles.stars} />

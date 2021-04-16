@@ -49,6 +49,7 @@
                         display: flex;
     
                         .type {
+                            cursor: pointer;
                             margin-right: 10px;
                             padding: 2px 5px;
                             border: 1px solid $icon-light;
@@ -140,6 +141,30 @@
            display: flex;
            flex-direction: column;
            align-items: flex-start;
+
+           .infowrapper {
+            margin-top: 15px;
+
+                .infos{
+                    cursor: pointer;
+                    margin-top: 10px;
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 0;
+                    color: $icon-light;
+                    border-bottom: 1px solid  $icon-light;
+
+                    a {
+                        text-decoration: none;
+                        color: $icon-light;
+                    }
+        
+                    .infostats {
+                        font-size: 15px;
+                        margin-right: 10px;
+                    }
+                }
+            }
        }
     }
 }
