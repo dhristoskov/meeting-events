@@ -50,7 +50,10 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
         kitchen_type, 
         hasGarten, 
         priceLevel, 
-        description
+        description,
+        opening_hours,
+        services,
+        speciality 
     } = req.body;
 
     if (!isLength(name, { min: 2 })) {
@@ -101,7 +104,10 @@ const addNewRestaurant = async (req: NextApiRequest, res: NextApiResponse) => {
             priceLevel,
             description,
             reservations: [],
-            newsletter: []
+            newsletter: [],
+            opening_hours,
+            services,
+            speciality 
         });
 
         const session = await mongoose.startSession();

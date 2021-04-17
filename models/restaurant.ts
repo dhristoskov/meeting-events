@@ -60,6 +60,19 @@ const restaurantSchema = new mongoose.Schema({
         type: String,
         require: true
     }],
+    //To rebuild next to two
+    opening_hours: {
+        type: String,
+        require: true
+    },
+    services: [{
+        type: String,
+        require: true
+    }],
+    speciality: [{
+        type: String,
+        require: true
+    }],
     created: {
         type: Date,
         required: true,
